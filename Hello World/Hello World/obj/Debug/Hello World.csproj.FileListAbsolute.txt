@@ -1,0 +1,7 @@
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\bin\Debug\Hello World.exe.config
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\bin\Debug\Hello World.exe
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\bin\Debug\Hello World.pdb
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\obj\Debug\Hello World.csprojResolveAssemblyReference.cache
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\obj\Debug\Hello World.csproj.CoreCompileInputs.cache
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\obj\Debug\Hello World.exe
+C:\repos\Bitbucket\nathan-klein-individual-work\Hello World\Hello World\obj\Debug\Hello World.pdb
