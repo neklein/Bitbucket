@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Restaurant Site</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet"
+        href="css/bootstrap.min.css"/>
+        <link rel="style sheet"
+        href="css/bootstrap-theme.min.css"/>
+        <link href="js/bootstrap.min.js" rel="style sheet"/>
+        <style>
+            form div label {
+                display:block;
+                float:left;
+                width:300px;
+                }
+            #submit {
+                text-align: center;
+            }
+        </style>
+        <link href="restaurantStyles.css"
+                rel="StyleSheet"
+                type="text/css"/>
+    </head>
+    <body>
+        <header id="header">
+        <h1 style="text-align:center">Shoot the Breeze</h1><hr/>
+        <div class="container">
+            <ul class="nav nav-tabs">
+        <li class="active"><a href="RestaurantHome.html"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li class="active"><a href="RestaurantMenu.html">Menu</a></li>
+        <li class="active"><a href="RestaurantContact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        </header>
+        <form>
+            <div><p>
+                <label id="NameLabel" for="Name">Name: </label>
+                <input id="Name" name="Name" type="text"/></p>
+            </div>
+            <div><p>
+                <label id="EmailLabel" for="Email">Email: </label>
+                <input id="Email" name="Email" type="text"/></p>
+            </div>
+            <div><p>
+                <label id="PhoneLabel" for="Phone">Phone: </label>
+                <input id="Phone" name="Phone" type="text"/></p>
+            </div>
+            <div><p>
+                <label id="ReasonforInquiryLabel" for="ReasonForInquiry">Reason for Inquiry: </label>
+                <select name="Reason">
+                    <option value="Value1">Catering</option>
+                    <option value="Value2">Private Party</option>
+                    <option value="Value3">Feedback</option>
+                    <option value="Value4">Other</option>
+                </select></p>
+            </div>
+            <div>
+                <p><label id="AdditionalInformationLabel" for="AdditionalInformation">Additional Information: </label>
+                <textarea id="AdditionalInformation" name="AdditionalInformation"></textarea></p>
+            </div>
+            <div>
+                <p><label id="RestaurantVisitLabel" for="RestaurantVisit">Have you been to the restaurant? </label>
+                <input type="radio" name="Answer" value="No" checked/> No
+                <input type="radio" name="Answer" value="Yes"/> Yes</p>
+            </div>
+            <div>
+                <p><label id="BestDaystoContactLabel" for="BestDaystoContact">Best days to contact you: </label></input>
+                    <input type="checkbox" id="M" name="M">M</input>
+                    <input type="checkbox" id="T" name="T">T</input>
+                    <input type="checkbox" id="W" name="W">W</input>
+                    <input type="checkbox" id="Th" name="Th">Th</input>
+                    <input type="checkbox" id="F" name="F">F</input>
+                </p>
+            </div>
+            <div id="submit">
+                <p><input type="submit" id="SendRequest" value="Send Request"/>
+            </p></div><hr/>
+        </form>
+    </body>
+    <footer>
+        <div>
+            <p>
+                321 Indigo Hills Blvd, Montana Beach, CA, 42910
+            </p>
+            <p>
+                987-654-3210
+            </p>
+        </div>
+    </footer>
+</html>
