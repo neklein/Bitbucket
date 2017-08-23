@@ -10,7 +10,6 @@ namespace FactorizorExercise
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("What number would you like to factor?");
             int number = GetNumberFromUser();
 
             Calculator.PrintFactors(number);
@@ -22,7 +21,29 @@ namespace FactorizorExercise
         }
         static int GetNumberFromUser()
         {
-            
+            string input;
+            int number;
+            bool isInvalid = true;
+
+            do
+            {
+                Console.WriteLine("What number would you like to factor?");
+
+                input = Console.ReadLine();
+
+                if (int.TryParse(input, out number))
+                {
+                    isInvalid = false;
+                    
+                }
+                
+                else
+                {
+                    Console.WriteLine("That is not a valid integer");
+                }
+                return number;
+            } while (isInvalid);
+     
         }
     }
 
@@ -33,6 +54,16 @@ namespace FactorizorExercise
         /// </summary>
         public static void PrintFactors(int number)
         {
+            Console.Write("The factors of " + number + " are: ");
+            for (int i = 1; i <= number; i++)
+            {
+                if (number % i == 0)
+                {
+                    Console.Write(i);
+                  
+                }
+            }
+            Console.WriteLine();
 
         }
 
@@ -41,7 +72,23 @@ namespace FactorizorExercise
         /// </summary>
         public static void IsPerfectNumber(int number)
         {
-
+            int sum = 0;
+            for (int i = 1; i <= number; i++)
+            {
+                if (number % i == 0)
+                {
+                    sum += i;
+                }
+            }
+            if (sum == number)
+            {
+                Console.WriteLine(number + " is a perfect number.");
+            }
+            else
+            {
+                Console.WriteLine(number + " is not a perfect number.");
+            }
+            
         }
 
         /// <summary>
@@ -49,7 +96,17 @@ namespace FactorizorExercise
         /// </summary>
         public static void IsPrimeNumber(int number)
         {
-
+            for (int i = 2; i < number; i++)
+            {
+                if (number % i == 0)
+                {
+                    Console.WriteLine(number + " is not a prime number");
+                }
+                else
+                {
+                    Console.WriteLine(number + " is a prime number");
+                }
+            }
         }
     }
 }
