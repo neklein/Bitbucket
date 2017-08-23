@@ -73,7 +73,7 @@ namespace FactorizorExercise
         public static void IsPerfectNumber(int number)
         {
             int sum = 0;
-            for (int i = 1; i <= number; i++)
+            for (int i = 1; i < number; i++)
             {
                 if (number % i == 0)
                 {
@@ -96,17 +96,25 @@ namespace FactorizorExercise
         /// </summary>
         public static void IsPrimeNumber(int number)
         {
-            for (int i = 2; i < number; i++)
+            int NumOfFactors = 0;
+            for (int i = 2; i < number - 1; i++)
             {
                 if (number % i == 0)
                 {
-                    Console.WriteLine(number + " is not a prime number");
-                }
-                else
-                {
-                    Console.WriteLine(number + " is a prime number");
+                    NumOfFactors += i;
                 }
             }
+            if (NumOfFactors > 0)
+            {
+                Console.WriteLine(number + " is not a prime number");
+
+            }
+            else
+            {
+                Console.WriteLine(number + " is a prime number");
+            }
+
+
         }
     }
 }
