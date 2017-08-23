@@ -10,39 +10,47 @@ namespace GuessingGame
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("What is your name?");
+            string name = Console.ReadLine();
+            Console.WriteLine(name + ", you can quit at any time by pressing Q.");
             int answer;
             string input;
-            int guess;
+            int guess = 0;
             Random rng = new Random();
             answer = rng.Next(1, 20);
+
             while (true)
             {
-                Console.WriteLine("Enter a guess between 1 and 20");
+                Console.WriteLine(name + ", Enter a guess between 1 and 20");
                 input = Console.ReadLine();
+                if (input == "Q")
+                {
+                    break;
+                }
                 if (int.TryParse(input, out guess))
                 {
                     if (guess == answer)
                     {
+                        Console.WriteLine(name + ", you guessed right! The answer is {0}", answer);
                         break;
                     }
                     if (guess < 1 || guess > 20)
                     {
-                        Console.WriteLine("Your guess should be between 1 and 20.");
+                        Console.WriteLine(name + ", your guess should be between 1 and 20.");
                         continue;
                     }
                     if (guess > answer)
                     {
-                        Console.WriteLine("Lower!");
+                        Console.WriteLine(name + ", Lower!");
                     }
                     if (guess < answer)
                     {
-                        Console.WriteLine("Higher!");
+                        Console.WriteLine(name + ", Higher!");
                     }
                 }
                
             }
-            Console.WriteLine("You guessed right! The answer is {0}", answer);
-            Console.WriteLine("Press any key to quit");
+            Console.WriteLine(name + ", you can press any key to quit");
             Console.ReadKey();
         }
     }
