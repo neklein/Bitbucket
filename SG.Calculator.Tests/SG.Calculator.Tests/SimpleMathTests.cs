@@ -39,5 +39,18 @@ namespace SG.Calculator.Tests
             SimpleMath math = new SimpleMath();
             Assert.Throws<DivideByZeroException>(() => math.Divide(5, 0));
         }
+
+        [SetUp]
+        public void Init()
+        {
+            //This code runs before each test
+        }
+
+        [TearDown]
+        public void Cleanup()
+        {
+            //This code runs after each test
+        }
+
     }
 }
