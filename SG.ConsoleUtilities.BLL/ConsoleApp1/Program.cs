@@ -11,7 +11,7 @@ namespace SG.ConsoleUtilities
     {
         static void Main(string[] args)
         {
-            int age = UserInput.GetIntFromUser("Enter your name in years: ");
+            int age = UserInput.GetIntFromUser("Enter your age in years: ");
             Console.WriteLine($"You entered the age: {age}.");
             Console.ReadLine();
 

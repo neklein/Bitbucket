@@ -3,59 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GuessingGame.BLL;
+using Factorizor.BLL;
 
-namespace GuessingGame.UI
+namespace Factorizor.UI
 {
     public class ConsoleOutput
     {
         public static void DisplayTitle()
         {
             Console.Clear();
-            Console.WriteLine("Welcome to the new and tested Guessing Game!\n\n");
+            Console.WriteLine("Welcome to the new and tested Factorizor!\n\n");
             Console.WriteLine("Press any key to begin ...");
             Console.ReadKey();
 
         }
         
-        public static void DisplayguessMessage(GuessResult result)
+        public static void DisplayFactorizorResults()
         {
-            switch (result)
+           
+        }
+
+        private static void DisplayFactors(int[] numbers)
+        {
+            Console.WriteLine("The factors of your number are: ");
+            for (int i = 0; i < numbers.Length; i++)
             {
-                case GuessResult.Invalid:
-                    DisplayInvalid();
-                    break;
-                case GuessResult.TooLow:
-                    DisplayTooLow();
-                    break;
-                case GuessResult.TooHigh:
-                    DisplayTooHigh();
-                    break;
-                case GuessResult.Correct:
-                    DisplayVictory();
-                    break;
+                Console.Write(numbers[i] + "/t");
+                Console.WriteLine();
             }
         }
 
-        private static void DisplayVictory()
+        private static void DisplayIsPerfect()
         {
-            Console.WriteLine("Congrats! You won! You chose the correct number!");
-            Console.WriteLine("Press any key...");
-            Console.ReadKey();
+            if (isPerfect) Console.WriteLine("Your number is perfect");
+            else Console.WriteLine("Your number is not perfect.");
         }
 
-        private static void DisplayTooHigh()
+        private static void DisplayIsPrime()
         {
-            Console.WriteLine("Too high!");
-            Console.WriteLine("Press any key...");
-            Console.ReadKey();
-        }
-
-        private static void DisplayTooLow()
-        {
-            Console.WriteLine("Too low!");
-            Console.WriteLine("Press any key...");
-            Console.ReadKey();
+            if (isPrime) Console.WriteLine("Your number is prime");
+            else Console.WriteLine("Your number is not prime.");
         }
 
         private static void DisplayInvalid()
@@ -63,6 +50,12 @@ namespace GuessingGame.UI
             Console.WriteLine("That guess is invalid! Please choose a number between 1 and 20.");
             Console.WriteLine("Press any key...");
             Console.ReadKey();
+        }
+
+        public static void DisplayEnd()
+        {
+            Console.WriteLine("Press any key...");
+
         }
 
 

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessingGame.UI", "GuessingGame.UI\GuessingGame.UI.csproj", "{0423E7C2-2D39-4EEE-A978-1D80615CAC2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizor.UI", "GuessingGame.UI\Factorizor.UI.csproj", "{0423E7C2-2D39-4EEE-A978-1D80615CAC2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessingGame.BLL", "GuessingGame.BLL\GuessingGame.BLL.csproj", "{FBA315C3-9D55-4A51-AAA9-C6A1CA2ED915}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizor.BLL", "GuessingGame.BLL\Factorizor.BLL.csproj", "{FBA315C3-9D55-4A51-AAA9-C6A1CA2ED915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessingGame.Test", "GuessingGame.Test\GuessingGame.Test.csproj", "{C13EBEF9-C8AA-48EC-A5D1-C3C1D86296E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizor.Test", "GuessingGame.Test\Factorizor.Test.csproj", "{C13EBEF9-C8AA-48EC-A5D1-C3C1D86296E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

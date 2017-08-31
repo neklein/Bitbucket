@@ -10,8 +10,8 @@ namespace Factorizor.UI
     {
         static void Main(string[] args)
         {
-            GameFlow game = new GameFlow();
-            game.PlayGame();
+            GameFlow StartGame = new GameFlow();
+            StartGame.StartFactorizor();
         }
     }
 }

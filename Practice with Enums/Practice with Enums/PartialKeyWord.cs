@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuessingGame.BLL
+namespace Practice
 {
-    public enum GuessResult
+    public partial class PartialKeyWord
     {
-        Invalid,
-        TooHigh,
-        TooLow,
-        Correct
+        //This is a partial class!
     }
 }

@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0423E7C2-2D39-4EEE-A978-1D80615CAC2A}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>GuessingGame.UI</RootNamespace>
-    <AssemblyName>GuessingGame.UI</AssemblyName>
+    <ProjectGuid>{FBA315C3-9D55-4A51-AAA9-C6A1CA2ED915}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GuessingGame.BLL</RootNamespace>
+    <AssemblyName>GuessingGame.BLL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,20 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleInput.cs" />
-    <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="GameFlow.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="FactorManager.cs" />
+    <Compile Include="FactorMatic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GuessingGame.BLL\GuessingGame.BLL.csproj">
-      <Project>{fba315c3-9d55-4a51-aaa9-c6a1ca2ed915}</Project>
-      <Name>GuessingGame.BLL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

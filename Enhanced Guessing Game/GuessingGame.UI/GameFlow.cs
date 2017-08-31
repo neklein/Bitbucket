@@ -1,36 +1,28 @@
-﻿using GuessingGame.BLL;
+﻿using Factorizor.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GuessingGame.UI
+namespace Factorizor.UI
 {
     public class GameFlow
     {
-        GameManager _manager;
+        FactorManager _manager;
 
-        private void CreateGameManagerInstance()
-        {
-            _manager = new GameManager();
-            _manager.Start();
-        }
 
         public void PlayGame()
         {
-            CreateGameManagerInstance();
-            ConsoleOutput.DisplayTitle();
+            userNum = ConsoleInput.GetNumberFromUser;
+            _manager = new FactorManager();
+            _manager.Start(userNum);
 
-            GuessResult result;
-            int guess;
+            ConsoleOutput.DsiplayFactors(_manager.GetFactors());
+            ConsoleOutput.DisplayIsPrime(_manager.GetIsPrime);
+            ConsoleOutput.DisplayIsPerfect(_manager.GetIsPerfect);
 
-            do
-            {
-                guess = ConsoleInput.GetGuessFromUser();
-                result = _manager.ProcessGuess(guess);
-                ConsoleOutput.DisplayguessMessage(result);
-            } while (result != GuessResult.Correct);
+            ConsoleOutput.DisplayEnd();
         }
     }
 }

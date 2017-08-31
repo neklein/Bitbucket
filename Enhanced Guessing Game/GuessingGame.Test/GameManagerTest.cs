@@ -4,50 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using GuessingGame.BLL;
-namespace GuessingGame.Test
+using Factorizor.BLL;
+namespace Factorizor.Test
 {
     [TestFixture]
-    public class GameManagerTest
+    public class FactorMaticTests
     {
         [Test]
-        public void InvalidGuessTest()
+        public void PerfectNumberTest()
         {
-            GameManager gameInstance = new BLL.GameManager();
-            gameInstance.Start();
-            GuessResult actual = gameInstance.ProcessGuess(42);
-            Assert.AreEqual(GuessResult.Invalid, actual);
+            FactorMatic test = new FactorMatic(6);
+            Assert.IsTrue(test.IsPerfect());
+            Assert.IsFalse(test.IsPrime());
         }
-        [Test]
-        public void GuessTooHigh()
-        {
-            GameManager gameInstance = new BLL.GameManager();
-
-            gameInstance.Start(5);
-            GuessResult actual = gameInstance.ProcessGuess(10);
-
-            Assert.AreEqual(GuessResult.TooHigh, actual);
-
-        }
-        [Test]
-        public void TooLowTestGuess()
-        {
-            GameManager gameInstance = new BLL.GameManager();
-            gameInstance.Start(10);
-            GuessResult actual = gameInstance.ProcessGuess(8);
-
-            Assert.AreEqual(GuessResult.TooLow, actual);
-
-        }
-
-        [Test]
-        public void CorrectGuessResult()
-        {
-            GameManager gameInstance = new BLL.GameManager();
-            gameInstance.Start(10);
-            GuessResult actual = gameInstance.ProcessGuess(10);
-
-            Assert.AreEqual(GuessResult.Correct, actual);
-        }
+      
     }
 }

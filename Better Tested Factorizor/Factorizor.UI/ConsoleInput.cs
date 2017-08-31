@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Factorizor.BLL;
 
 namespace Factorizor.UI
 {
-   public class ConsoleInput
+    public class ConsoleInput
     {
-        public static int GetNumberFromUser()
+        public static int GetIntFromUser()
         {
             Console.Clear();
             int output;
@@ -17,7 +18,7 @@ namespace Factorizor.UI
 
             while (!IsInt)
             {
-                Console.Write("Enter a number to check: ");
+                Console.WriteLine("Enter a positive integer");
                 input = Console.ReadLine();
                 if (int.TryParse(input, out output))
                 {
@@ -26,12 +27,14 @@ namespace Factorizor.UI
                 }
                 else
                 {
-                    Console.WriteLine("That was not a valid number! Press a key..");
+                    Console.WriteLine("That is not a positive integer! Press any key...");
                     Console.ReadKey();
                     IsInt = false;
                 }
+
             }
             return -1;
         }
+
     }
 }
