@@ -3,32 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GoblinBattle.BLL;
+using Creatures_and_Classes;
 
-namespace PlayWithGoblins
+
+namespace GoblinBattle.UI
 {
     class Program
     {
+       
         static void Main(string[] args)
         {
+            Ogre MyOgre = new Ogre(1);
+            MyOgre.Regen();
             Goblin aGoblin = new Goblin();
             Goblin bGoblin = new Goblin();
 
             aGoblin.HitPoints = 20;
             aGoblin.Name = "Grendall";
-            aGoblin.MyWeapon = new Weapons();
+            aGoblin.MyWeapon = new Axe();
             aGoblin.MyWeapon.WeaponName = "TomCleaver";
-            aGoblin.MyWeapon.WType = WeaponType.Axe;
             aGoblin.MyWeapon.BaseAttack = 4;
             aGoblin.MyClass2 = new Warrior();
+
+            MyOgre.AddPotion(new HealingPotion());
+            MyOgre.Drink();
 
 
             
 
             bGoblin.HitPoints = 20;
             bGoblin.Name = "Kowlin";
-            bGoblin.MyWeapon = new Weapons();
+            bGoblin.MyWeapon = new Dagger();
             bGoblin.MyWeapon.WeaponName = "Destroyer";
-            bGoblin.MyWeapon.WType = WeaponType.Wand;
             bGoblin.MyWeapon.BaseAttack = 1;
             bGoblin.MyClass1 = new Wizard();
 
@@ -73,7 +80,7 @@ namespace PlayWithGoblins
             }
         }
 
-        public Weapons MyWeapon { get; set; }
+        public Weapon MyWeapon { get; set; }
 
         public Wizard MyClass1 { get; set; }
         public Warrior MyClass2 { get; set; }
@@ -121,9 +128,8 @@ namespace PlayWithGoblins
             WarCry(totalDamage);
             
             
-               if (M == 1)
-                MyClass1.UseSpell(totalDamage);
-                MyClass2.AttackAttack(totalDamage);
+                if (MyClass1 != null) MyClass1.UseSpell(totalDamage);
+                else MyClass2.AttackAttack(totalDamage);
             Console.WriteLine($"{Name} attacks {target.Name} for {totalDamage} damage!");
             target.Hit(totalDamage);
 

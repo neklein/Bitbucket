@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlayWithGoblins
+namespace Creatures_and_Classes
 {
-    class Spells
+    public abstract class Potion
     {
-        
+        public abstract void Drink(CreatureProperties drinker);
     }
 }

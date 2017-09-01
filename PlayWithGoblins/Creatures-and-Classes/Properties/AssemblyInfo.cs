@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GoblinBattle")]
+[assembly: AssemblyTitle("Creatures-and-Classes")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GoblinBattle")]
+[assembly: AssemblyProduct("Creatures-and-Classes")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fc242619-55e1-4b80-a4cc-ca3fd5d0d934")]
+[assembly: Guid("df3d560e-f0e1-475b-a4be-1b3bf93d7469")]
 
 // Version information for an assembly consists of the following four values:
 //
