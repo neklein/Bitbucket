@@ -14,6 +14,9 @@ namespace BattleShip.UI
             StartGame.WelcomeMessage();
             StartGame.GetName();
             StartGame.GetShip();
+            StartGame.FirstTurnSelection();
+            StartGame.ShotsFired();
+            StartGame.ConcludingTheGame();
         }
     }
 }

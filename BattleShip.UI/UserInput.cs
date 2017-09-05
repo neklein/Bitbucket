@@ -26,7 +26,7 @@ namespace BattleShip.UI
             _name1 = name1;
             _name2 = name2;
 
-            Console.WriteLine("Your board is available for ship placement. Player 1, please get ready to place your ships!");
+            Console.WriteLine("Your board is available for ship placement. Please get ready to place your ships!");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
@@ -93,11 +93,9 @@ namespace BattleShip.UI
         }
 
 
-
     
 
 
-        //need input for coordinate locations in ship placement
         
         //need input for coordinate locations to attack
 
