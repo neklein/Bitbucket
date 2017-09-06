@@ -17,7 +17,7 @@ namespace Practice
 
         public void ThisWontWork()
         {
-            _oneChanceToSet = 5;
+            //_oneChanceToSet = 5;
         }
     }
 }

@@ -10,6 +10,69 @@ namespace Practice
     {
         static void Main(string[] args)
         {
+
+            //collect a list of numbers
+            string input;
+            int output;
+
+            List<int> numbers = new List<int>();
+
+            do
+            {
+                Console.Write("Enter a number(Q to quit): ");
+                input = Console.ReadLine();
+
+                if(int.TryParse(input, out output))
+                {
+                    numbers.Add(output);
+                }
+            } while (input != "Q");
+
+            Console.WriteLine("The numbers entered were: {0}", string.Join(",", numbers));
+
+            int sum = 0;
+
+            for(int i = 0; i < numbers.Count; i++)
+            {
+                sum += numbers[i];
+            }
+
+            Console.WriteLine("The sum of the numbers entered is: {0}", sum); 
+
+            
+            
+            /*List<int> nums = new List<int>();
+
+            nums.Add(2);
+            nums.Add(23);
+            nums.Add(47);
+
+            int[] toAdd = { 4, 7, 12, 14 };
+            nums.AddRange(toAdd);
+
+            nums.Insert(20, 2);
+
+
+            for (int i = 0; i < nums.Count; i++)
+            {
+                Console.Write($"{ nums[i]}, ");
+            } --*/
+
+            /* Stack<int> s = new Stack<int>(10);
+
+            //push 3 values onto the stack
+            s.Push(5);
+            s.Push(4);
+            s.Push(7);
+
+            int value1 = s.Pop();
+
+            Console.Write($"{value1}");
+            Console.ReadLine();
+            s.Pop(); --*/
+
+
+
             /*Goblins g1 = new Goblins();
             g1.Name = "George";
             g1.Level = 12;
