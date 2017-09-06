@@ -28,19 +28,13 @@ namespace BattleShip.UI
                     {
 
                         var myCoord = new Coordinate(currentX, currentY);
-                        if (PlayerBoard.Ships[currentShip] == null)
-                        {
-                            continue;
-                        }
-                        var positions = PlayerBoard.Ships[currentShip].BoardPositions;
 
+                        if (PlayerBoard.Ships[currentShip].BoardPositions == null) continue;
 
-
-                        for (int currentPosition = 0; currentPosition < positions.Length; currentPosition++)
+                        for (int currentPosition = 0; currentPosition < PlayerBoard.Ships[currentShip].BoardPositions.Length; currentPosition++)
                         {
 
-
-                            if (positions[currentPosition] == myCoord)
+                            if (PlayerBoard.Ships[currentShip].BoardPositions[currentPosition] == myCoord)
                             {
                                 if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Destroyer)
                                     Console.Write("D");
