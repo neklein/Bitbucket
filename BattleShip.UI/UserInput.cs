@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Ships;
+using BattleShip.BLL.Responses;
 
 namespace BattleShip.UI
 {
@@ -13,6 +14,8 @@ namespace BattleShip.UI
     {
         public string _name1;
         public string _name2;
+
+        ShipAndShotHistory ShowTheBoard = new ShipAndShotHistory();
 
 
         public void GetUserName()
@@ -50,7 +53,7 @@ namespace BattleShip.UI
 
             //for later: need to change this to an int.TryParse, then alter the switch to reflect.
             int ForShipDirection = int.Parse(Console.ReadLine());
-            
+
             switch (ForShipDirection)
             {
                 
@@ -90,13 +93,11 @@ namespace BattleShip.UI
 
             return RequestToReturn;
 
+
+
         }
 
 
-    
-
-
-        
         //need input for coordinate locations to attack
 
     }

@@ -7,11 +7,14 @@ using BattleShip.BLL;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Responses;
+using BattleShip.BLL.Ships;
+
 
 namespace BattleShip.UI
 {
     public class GameLogicControl
     {
+
 
         public GameLogicControl()
         {
@@ -57,12 +60,14 @@ namespace BattleShip.UI
 
         public void GetShip()
         {
+            ShipAndShotHistory DrawingBoard = new ShipAndShotHistory();
+
             UserInput PlaceThatShip = new UserInput();
             GiveMessagesToUser.Player1PlaceShipMessage();
 
+            
             for (int i = 0; i < Player1Board.Ships.Length; i++)
             {
-
                 PlaceShipRequest Player1Ship = PlaceThatShip.InputShipRequest();
                 ShipPlacement response;
 
@@ -74,17 +79,22 @@ namespace BattleShip.UI
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesNotEnoughSpace();
                         Player1Ship = PlaceThatShip.InputShipRequest();
+                        DrawingBoard.DrawBoard(Player1Board);
                         continue;
                     }
                     if (response == ShipPlacement.Overlap)
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesOverlapsAnotherShip();
                         Player1Ship = PlaceThatShip.InputShipRequest();
+                        DrawingBoard.DrawBoard(Player1Board);
+
                         continue;
                     }
                     if(response == ShipPlacement.Ok)
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesSuccess();
+                        DrawingBoard.DrawBoard(Player1Board);
+
                         break;
                     }
 
@@ -108,17 +118,23 @@ namespace BattleShip.UI
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesNotEnoughSpace();
                         Player2Ship = PlaceThatShip.InputShipRequest();
+                        DrawingBoard.DrawBoard(Player2Board);
+
                         continue;
                     }
                     if (response == ShipPlacement.Overlap)
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesOverlapsAnotherShip();
                         Player2Ship = PlaceThatShip.InputShipRequest();
+                        DrawingBoard.DrawBoard(Player2Board);
+
                         continue;
                     }
                     if (response == ShipPlacement.Ok)
                     {
                         GiveMessagesToUser.GiveUserShipPlacementNotesSuccess();
+                        DrawingBoard.DrawBoard(Player2Board);
+
                         break;
                     }                       
                 }
