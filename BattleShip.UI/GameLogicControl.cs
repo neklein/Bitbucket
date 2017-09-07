@@ -18,6 +18,7 @@ namespace BattleShip.UI
         public void StartTheGame()
         {
 
+
             WelcomeMessage();
             GetName();
             GetShip();
