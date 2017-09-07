@@ -23,36 +23,70 @@ namespace BattleShip.UI
             {
                 for (int currentY = 1; currentY < 11; currentY++)
                 {
-
-                    for (int currentShip = 0; currentShip < PlayerBoard.Ships.Length; currentShip++)
+                    bool ifShip = false;
+                    
+                    foreach (var ship in PlayerBoard.Ships)
                     {
-
-                        var myCoord = new Coordinate(currentX, currentY);
-
-                        if (PlayerBoard.Ships[currentShip].BoardPositions == null) continue;
-
-                        for (int currentPosition = 0; currentPosition < PlayerBoard.Ships[currentShip].BoardPositions.Length; currentPosition++)
+                        if (ship == null)
                         {
+                            continue;
+                        }
 
-                            if (PlayerBoard.Ships[currentShip].BoardPositions[currentPosition] == myCoord)
+                        if (ship != null)
+                        {
+                            var myCoord = new Coordinate(currentX, currentY);
+
+                            if (ship.BoardPositions.Contains(myCoord))
                             {
-                                if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Destroyer)
+
+                                if (ship.ShipType == ShipType.Destroyer)
+                                {
                                     Console.Write("D");
-                                else if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Submarine)
+                                    ifShip = true;
+                                    break;
+
+                                }
+                                else if (ship.ShipType == ShipType.Submarine)
+                                {
                                     Console.Write("S");
-                                else if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Cruiser)
+                                    ifShip = true;
+
+                                    break;
+                                }
+                                else if (ship.ShipType == ShipType.Cruiser)
+                                {
                                     Console.Write("C");
-                                else if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Battleship)
+                                    ifShip = true;
+
+                                    break;
+                                }
+                                else if (ship.ShipType == ShipType.Battleship)
+                                {
                                     Console.Write("B");
-                                else if (PlayerBoard.Ships[currentShip].ShipType == ShipType.Carrier)
+                                    ifShip = true;
+
+                                    break;
+                                }
+                                else if (ship.ShipType == ShipType.Carrier)
+                                {
                                     Console.Write("C");
-                                else Console.Write("_");
+                                    ifShip = true;
+
+                                    break;
+
+                                }
+                                
+
                             }
 
 
                         }
                     }
-
+                    if (!ifShip)
+                    {
+                        Console.Write("_");
+                        
+                    }
                 }
                 Console.WriteLine();
 

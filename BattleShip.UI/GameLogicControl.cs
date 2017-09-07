@@ -15,6 +15,20 @@ namespace BattleShip.UI
     public class GameLogicControl
     {
 
+        public void StartTheGame()
+        {
+
+            WelcomeMessage();
+            GetName();
+            GetShip();
+            FirstTurnSelection();
+            ShotsFired();
+            ConcludingTheGame();
+
+            
+
+
+        }
 
         public GameLogicControl()
         {
@@ -24,15 +38,8 @@ namespace BattleShip.UI
         Board Player1Board = new Board();
         Board Player2Board = new Board();
 
-        public GameLogicControl(Board A, Board B)
-        {
-            A = Player1Board;
-            B = Player2Board;
-        }
 
 
-        string Player1;
-        string Player2;
 
         Random _rng = new Random();
         int TurnSelector = 0;
@@ -41,11 +48,13 @@ namespace BattleShip.UI
         ConsoleOutput GiveMessagesToUser = new ConsoleOutput();
 
 
-        public void WelcomeMessage()
+        public static void WelcomeMessage()
         {
             ConsoleOutput Welcome = new ConsoleOutput();
             Welcome.OutputWelcome();
         }
+        string Player1;
+        string Player2;
 
         public void GetName()
         {
@@ -53,6 +62,8 @@ namespace BattleShip.UI
             Name.GetUserName();
             Player1 = Name._name1;
             Player2 = Name._name2;
+
+            
 
         }
 
@@ -102,6 +113,8 @@ namespace BattleShip.UI
                 }
                 
             }
+            Console.WriteLine("Press any key to continue..");
+            Console.ReadKey();
 
             Console.Clear();
             GiveMessagesToUser.Player2PlaceShipMessage();
@@ -163,16 +176,42 @@ namespace BattleShip.UI
 
         public void ShotsFired()
         {
-            //need to transfer these over to UserInput somehow
-
+            ShipAndShotHistory DrawShotBoard = new ShipAndShotHistory();
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine($"{SelectThatTurn}, please enter the X coordinate for your shot.");
-                int CoordinateX = int.Parse(Console.ReadLine());
+                int CoordinateX;
+                while (true)
+                {
+                    Console.WriteLine($"{SelectThatTurn}, please enter the X coordinate for your shot.");
+                    string inputX = Console.ReadLine();
 
-                Console.WriteLine($"{SelectThatTurn}, please enter the Y coordinate for your shot.");
-                int CoordinateY = int.Parse(Console.ReadLine());
+                    if (int.TryParse(inputX, out CoordinateX))
+                        break;
+                    else
+                    {
+                        Console.WriteLine("That is not a valid coordinate.");
+                        continue;
+                    }
+
+                }
+
+                int CoordinateY;
+                while (true)
+                {
+                    Console.WriteLine($"{SelectThatTurn}, please enter the Y coordinate for your shot.");
+                    string inputY = Console.ReadLine();
+
+                    if (int.TryParse(inputY, out CoordinateY))
+                        break;
+                    else
+                    {
+                        Console.WriteLine("That is not a valid coordinate.");
+                        continue;
+                    }
+
+                }
+
                 Coordinate Shot = new Coordinate(CoordinateX, CoordinateY);
                 FireShotResponse response;
 
@@ -184,6 +223,8 @@ namespace BattleShip.UI
                     case 1:
 
                         response = Player2Board.FireShot(Shot);
+                        DrawShotBoard.ShowShotHistory(Player2Board);
+
                         switch (response.ShotStatus)
                         {
                             case ShotStatus.Invalid:
@@ -212,6 +253,12 @@ namespace BattleShip.UI
                                 FireAway.OutputVictory();
                                 break;
 
+                        }
+
+                        if (response.ShotStatus == ShotStatus.Victory)
+                        {
+                            //need to check victory conditions
+                            break;
                         }
 
                         TurnSelector = 2;
@@ -223,22 +270,14 @@ namespace BattleShip.UI
                             SelectThatTurn = Player1;
                             
                         }
-                        if (response.ShotStatus == ShotStatus.HitAndSunk)
-                        {
-                            //which ship was sunk?
-                            //display ship here?;
-                        }
 
-                        if (response.ShotStatus == ShotStatus.Victory)
-                        {
-                            //need to check victory conditions
-                            break;
-                        }
 
 
                         continue;
                     case 2:
+
                         response = Player1Board.FireShot(Shot);
+                        DrawShotBoard.ShowShotHistory(Player1Board);
 
                         switch (response.ShotStatus)
                         {
@@ -268,6 +307,11 @@ namespace BattleShip.UI
                                 FireAway.OutputVictory();
                                 break;
 
+                        }
+                        if (response.ShotStatus == ShotStatus.Victory)
+                        {
+                            //need to check victory conditions
+                            break;
                         }
 
                         TurnSelector = 1;
@@ -284,11 +328,6 @@ namespace BattleShip.UI
                             //Need to display the sunken ship;
                         }
 
-                        if (response.ShotStatus == ShotStatus.Victory)
-                        {
-                            //need to check victory conditions
-                            break;
-                        }
 
                         continue;
 

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleShip.UI
+namespace BirthdayTracker.UI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            GameLogicControl StartGame = new GameLogicControl();
-            StartGame.StartTheGame();
+            ProgramFlow birthdayFlow = new ProgramFlow();
+            birthdayFlow.Start();
         }
     }
 }

@@ -39,22 +39,73 @@ namespace BattleShip.UI
         {
             PlaceShipRequest RequestToReturn = new PlaceShipRequest();
 
-            Console.WriteLine("Player, select the board location for your ship. Please enter the X coordinate.");
-            string CoordinateX = Console.ReadLine();
+            int CoordinateX;
 
-            Console.WriteLine("Player, please enter the Y coordinate.");
-            string CoordinateY = Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Player, select the board location for your ship. Please enter the X coordinate.");
+                string InputX = Console.ReadLine();
 
-            Coordinate ForShipCoordinate = new Coordinate(int.Parse(CoordinateX), int.Parse(CoordinateY));
+                if (int.TryParse(InputX, out CoordinateX))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid coordinate. Please enter a valid Coordinate");
+                    continue;
+                }
 
-            RequestToReturn.Coordinate = ForShipCoordinate;
+            }
 
-            Console.WriteLine("Player, please select a ship direction: 0 = Left, 1 = right, 2 = up, or 3 = down.");
+            int CoordinateY;
 
-            //for later: need to change this to an int.TryParse, then alter the switch to reflect.
-            int ForShipDirection = int.Parse(Console.ReadLine());
 
-            switch (ForShipDirection)
+            while (true)
+            {
+                Console.WriteLine("Player, select the board location for your ship. Please enter the Y coordinate.");
+                string InputY = Console.ReadLine();
+
+                if (int.TryParse(InputY, out CoordinateY))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid coordinate. Please enter a valid Coordinate.");
+                    continue;
+                }
+            }
+
+            Coordinate NewShipCoordinate = new Coordinate (CoordinateX, CoordinateY);
+            RequestToReturn.Coordinate = NewShipCoordinate;
+
+
+            int direction;
+
+            while (true)
+            {
+                Console.WriteLine("Player, please select a ship direction: 0 = Up, 1 = Down, 2 = Left, or 3 = Right.");
+                string InputDirection = Console.ReadLine();
+                
+                if (int.TryParse(InputDirection, out direction))
+                {
+                    if(!(direction >= 0 || direction < 4))
+                    {
+                        Console.WriteLine("That is not a valid direction");
+                        continue;
+                    }
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid direction. Please enter a valid direction.");
+                    continue;
+                }
+
+            }
+
+            switch (direction)
             {
                 
                 case 0:
@@ -70,8 +121,24 @@ namespace BattleShip.UI
                     break;
             }
 
-            Console.WriteLine("Now enter the number associated with the ship type: 0 = Destroyer, 1 = Submarine, 2 = Cruiser, 3 = Battleship, 4 = Carrier");
-            int NewShip = int.Parse(Console.ReadLine());
+            int NewShip;
+            while (true)
+            {
+                Console.WriteLine("Now enter the number associated with the ship type: 0 = Destroyer, 1 = Submarine, 2 = Cruiser, 3 = Battleship, 4 = Carrier");
+                string shipType = Console.ReadLine();
+
+                if (int.TryParse(shipType, out NewShip))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("That is not a valid valid ship. Please enter a valid ship.");
+                    continue;
+                }
+            }
+
+
             switch (NewShip)
             {
                 case 0:

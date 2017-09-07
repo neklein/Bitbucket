@@ -116,32 +116,6 @@ namespace BattleShip.UI
             Console.WriteLine("Would you like to play again? Press 'Y' to play again or 'N' to exit.");
         }
 
-        Board Player1ShotsFiredBoard = new Board();
-        Board Player2ShotsFiredBoard = new Board();
-
-        Board Player2ShipDisplayBoard = new Board();
-
-        Board Player1ShipDisplayBoard = new Board();
-        public void DisplayShipPlacementPlayer1()
-        {
-            GameLogicControl ShowBoard = new GameLogicControl(Player1ShipDisplayBoard, Player2ShipDisplayBoard);
-            ShowBoard.GetShip();
-
-
-            string[,] ShowThatBoard = new string[11, 11];
-
-            Console.WriteLine("Player1 Board Display:");
-
-            for (int i = 1; i < 11; i++)
-            {
-
-
-                for (int j = 1; j < 11; j++)
-                {
-                    Console.Write($"{ShowThatBoard[i, j] = "_"}");
-                }
-            }
-        }
 
 
     }
