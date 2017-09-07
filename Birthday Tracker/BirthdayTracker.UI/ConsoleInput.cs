@@ -8,10 +8,10 @@ namespace BirthdayTracker.UI
 {
     public class ConsoleInput
     {
-        public static void KeyToContinue()
+        public static string KeyToContinue(string message)
         {
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
+            Console.WriteLine(message);
+           return Console.ReadKey().KeyChar.ToString();
         }
 
         public static DateTime AskForBirthday()
