@@ -129,6 +129,7 @@ namespace BattleShip.UI
 
                 if (int.TryParse(shipType, out NewShip))
                 {
+                    
                     break;
                 }
                 else
@@ -157,7 +158,7 @@ namespace BattleShip.UI
                     RequestToReturn.ShipType = ShipType.Carrier;
                     break;
             }
-
+            
             return RequestToReturn;
 
 

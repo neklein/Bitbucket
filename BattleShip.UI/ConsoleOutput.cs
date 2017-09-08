@@ -45,6 +45,11 @@ namespace BattleShip.UI
 
         }
 
+        public void ThatIsADuplicateShip()
+        {
+            Console.WriteLine("That ship has already been placed. Please enter another.");
+        }
+
         public void GiveUserShipPlacementNotesSuccess()
         {
             Console.WriteLine($"The ship is placed! Press any key to continue...");

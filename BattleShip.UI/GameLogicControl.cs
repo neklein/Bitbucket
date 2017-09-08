@@ -14,10 +14,16 @@ namespace BattleShip.UI
 {
     public class GameLogicControl
     {
+        Board Player1Board;
+        Board Player2Board;
 
         public void StartTheGame()
         {
+            Board board1 = new Board();
+            Board board2 = new Board();
 
+            board1 = Player1Board;
+            board2 = Player2Board;
 
             WelcomeMessage();
             GetName();
@@ -36,8 +42,6 @@ namespace BattleShip.UI
 
         }
 
-        Board Player1Board = new Board();
-        Board Player2Board = new Board();
 
 
 
@@ -86,6 +90,26 @@ namespace BattleShip.UI
                 //for ShipPlacement.NotEnoughSpace or .Overlap...I need additional things (cases?)
                 while (true)
                 {
+                    foreach (var ship in Player1Board.Ships)
+                    {
+                        while (true)
+                        {
+                            if (ship == null)
+                            {
+                                break;
+                            }
+
+                            else if (Player1Ship.ShipType == ship.ShipType)
+
+                            {
+                                GiveMessagesToUser.ThatIsADuplicateShip();
+                                Player1Ship = PlaceThatShip.InputShipRequest();
+                                continue;
+                            }
+                            else break;
+                        }
+                       
+                    }
                     response = Player1Board.PlaceShip(Player1Ship);
                     if (response == ShipPlacement.NotEnoughSpace)
                     {
@@ -102,12 +126,16 @@ namespace BattleShip.UI
 
                         continue;
                     }
+                    
                     if(response == ShipPlacement.Ok)
                     {
-                        GiveMessagesToUser.GiveUserShipPlacementNotesSuccess();
-                        DrawingBoard.DrawBoard(Player1Board);
+                        
+                    GiveMessagesToUser.GiveUserShipPlacementNotesSuccess();
+                    DrawingBoard.DrawBoard(Player1Board);
 
-                        break;
+                    break;
+
+                        
                     }
 
 
@@ -127,6 +155,26 @@ namespace BattleShip.UI
 
                 while (true)
                 {
+                    foreach (var ship in Player2Board.Ships)
+                    {
+                        while (true)
+                        {
+                            if (ship == null)
+                            {
+                                break;
+                            }
+
+                            else if (Player2Ship.ShipType == ship.ShipType)
+
+                            {
+                                GiveMessagesToUser.ThatIsADuplicateShip();
+                                Player2Ship = PlaceThatShip.InputShipRequest();
+                                continue;
+                            }
+                            else break;
+                        }
+
+                    }
                     response = Player2Board.PlaceShip(Player2Ship);
                     if (response == ShipPlacement.NotEnoughSpace)
                     {
@@ -146,6 +194,7 @@ namespace BattleShip.UI
                     }
                     if (response == ShipPlacement.Ok)
                     {
+
                         GiveMessagesToUser.GiveUserShipPlacementNotesSuccess();
                         DrawingBoard.DrawBoard(Player2Board);
 
@@ -180,6 +229,29 @@ namespace BattleShip.UI
             ShipAndShotHistory DrawShotBoard = new ShipAndShotHistory();
             while (true)
             {
+                if (Player2Board.Ships.All(s => s.IsSunk))
+                {
+                    Console.WriteLine("The game is over! Would you like to play again? Press Y to play again or any other key to exit.");
+                    string playAgain = Console.ReadLine();
+
+                    if (playAgain == "Y" || playAgain == "y")
+                    {
+                        Console.Clear();
+                        StartTheGame();
+                    }
+                    else break;
+                }
+                if (Player1Board.Ships.All(s => s.IsSunk))
+                {
+                    Console.WriteLine("The game is over! Would you like to play again? Press Y to play again or any other key to exit.");
+                    string playAgain = Console.ReadLine();
+                    if (playAgain == "Y" || playAgain == "y")
+                    {
+                        Console.Clear();
+                        StartTheGame();
+                    }
+                    else break;
+                }
                 Console.Clear();
                 int CoordinateX;
                 while (true)
@@ -221,8 +293,8 @@ namespace BattleShip.UI
 
                 switch (TurnSelector)
                 {
+                    
                     case 1:
-
                         response = Player2Board.FireShot(Shot);
                         DrawShotBoard.ShowShotHistory(Player2Board);
 
@@ -256,11 +328,6 @@ namespace BattleShip.UI
 
                         }
 
-                        if (response.ShotStatus == ShotStatus.Victory)
-                        {
-                            //need to check victory conditions
-                            break;
-                        }
 
                         TurnSelector = 2;
                         SelectThatTurn = Player2;
@@ -276,7 +343,6 @@ namespace BattleShip.UI
 
                         continue;
                     case 2:
-
                         response = Player1Board.FireShot(Shot);
                         DrawShotBoard.ShowShotHistory(Player1Board);
 
@@ -308,11 +374,6 @@ namespace BattleShip.UI
                                 FireAway.OutputVictory();
                                 break;
 
-                        }
-                        if (response.ShotStatus == ShotStatus.Victory)
-                        {
-                            //need to check victory conditions
-                            break;
                         }
 
                         TurnSelector = 1;

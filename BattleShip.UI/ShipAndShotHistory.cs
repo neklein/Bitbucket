@@ -102,8 +102,19 @@ namespace BattleShip.UI
                     Coordinate myCoord = new Coordinate(currentX, currentY);
                     PlayerBoard.CheckCoordinate(myCoord);
 
-                    if (PlayerBoard.CheckCoordinate(myCoord) == ShotHistory.Hit) Console.Write("H");
-                    else if (PlayerBoard.CheckCoordinate(myCoord) == ShotHistory.Miss) Console.Write("M");
+                    if (PlayerBoard.CheckCoordinate(myCoord) == ShotHistory.Hit)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("H");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    else if (PlayerBoard.CheckCoordinate(myCoord) == ShotHistory.Miss)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("M");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                    }
                     else if (PlayerBoard.CheckCoordinate(myCoord) == ShotHistory.Unknown) Console.Write("_");
                 }
                 Console.WriteLine();
