@@ -14,22 +14,13 @@ namespace BattleShip.UI
 {
     public class GameLogicControl
     {
-        Board Player1Board;
-        Board Player2Board;
 
         public void StartTheGame()
         {
-            Board board1 = new Board();
-            Board board2 = new Board();
-
-            board1 = Player1Board;
-            board2 = Player2Board;
 
             WelcomeMessage();
             GetName();
             GetShip();
-            FirstTurnSelection();
-            ShotsFired();
             ConcludingTheGame();
 
             
@@ -76,6 +67,9 @@ namespace BattleShip.UI
 
         public void GetShip()
         {
+            Board Player1Board = new Board();
+            Board Player2Board = new Board();
+
             ShipAndShotHistory DrawingBoard = new ShipAndShotHistory();
 
             UserInput PlaceThatShip = new UserInput();
@@ -204,10 +198,8 @@ namespace BattleShip.UI
 
             }
 
-        }
+        
 
-        public string FirstTurnSelection()
-        {
             string FirstTurn;
             TurnSelector = _rng.Next(1, 3);
 
@@ -220,15 +212,11 @@ namespace BattleShip.UI
             Console.ReadKey();
 
             SelectThatTurn = FirstTurn;
-            return SelectThatTurn;
 
-        }
-
-        public void ShotsFired()
-        {
             ShipAndShotHistory DrawShotBoard = new ShipAndShotHistory();
             while (true)
             {
+                
                 if (Player2Board.Ships.All(s => s.IsSunk))
                 {
                     Console.WriteLine("The game is over! Would you like to play again? Press Y to play again or any other key to exit.");
