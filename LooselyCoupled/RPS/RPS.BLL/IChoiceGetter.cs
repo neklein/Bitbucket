@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibraryForPracticeItems;
 
-namespace Practice1
+namespace RPS.BLL
 {
-    class Program
+    public interface IChoiceGetter
     {
-        public static void Main()
-        {
-
-        }
+        Choice GetChoice();
     }
 }

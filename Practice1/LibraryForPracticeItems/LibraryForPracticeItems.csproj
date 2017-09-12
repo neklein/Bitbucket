@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{169D8A38-17B7-4CDB-942B-4429922A83C9}</ProjectGuid>
+    <ProjectGuid>{BBA124CD-F02B-43C6-9A26-78D89840655D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentManagement.BLL</RootNamespace>
-    <AssemblyName>StudentManagement.BLL</AssemblyName>
+    <RootNamespace>LibraryForPracticeItems</RootNamespace>
+    <AssemblyName>LibraryForPracticeItems</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,13 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\StudentRepository.cs" />
-    <Compile Include="Helpers\ConsoleIO.cs" />
-    <Compile Include="Logic Control.cs" />
-    <Compile Include="Models\ListStudentResponses.cs" />
-    <Compile Include="Models\Student.cs" />
+    <Compile Include="IComparablePractice.cs" />
+    <Compile Include="MovieRating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workflows\EditStudentWorkflow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

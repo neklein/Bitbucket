@@ -13,52 +13,75 @@ namespace StudentManagement.BLL.Data
         //list, add, edit, delete
         //C:Data\SystemIO\Data
 
-        private string _filePath;
+        private string _filePath = @"C:\repos\Bitbucket\Data\SystemIO\Student.txt";
 
         public StudentRepository(string filePath)
         {
             _filePath = filePath;
         }
 
-        public List<Student> List()
+        public ListStudentResponses List()
         {
-            List<Student> students = new List<Student>();
+            ListStudentResponses response = new ListStudentResponses();
+            response.Success = true;
 
-            using(StreamReader sr = new StreamReader(_filePath))
+            response.Students = new List<Student>();
+
+            try
             {
-                sr.ReadLine();
-                string line;
-                while((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(_filePath))
                 {
-                    Student newStudent = new Student();
+                    sr.ReadLine();
+                    string line;
 
-                    string[] columns = line.Split(',');
+                    //Could put "try" in the loop to just skip the bad students
+                    //however, we want to know if something goes wrong
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        Student newStudent = new Student();
 
-                    newStudent.FirstName = columns[0];
-                    newStudent.LastName = columns[1];
-                    newStudent.Major = columns[2];
-                    newStudent.GPA = decimal.Parse(columns[3]);
+                        string[] columns = line.Split(',');
 
-                    students.Add(newStudent);
+                        newStudent.FirstName = columns[0];
+                        newStudent.LastName = columns[1];
+                        newStudent.Major = columns[2];
+                        newStudent.GPA = decimal.Parse(columns[3]);
+
+                        response.Students.Add(newStudent);
+                    }
+
                 }
             }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
 
-            return students;
+            return response;
         }
 
         public void Add(Student student)
         {
-            throw new NotImplementedException();
+            using(StreamWriter sw = new StreamWriter(_filePath, true))
+            {
+                string line = string.Format("{0},{1},{2},{3}", student.FirstName, student.LastName, student.Major, student.GPA.ToString());
+
+                sw.WriteLine(line);
+            }
         }
 
         public void Edit(Student student, int index)
         {
-            throw new NotImplementedException();
+            var response = List();
+            response.Students[index] = student;
+
         }
 
         public void Delete(int index)
         {
-            throw new NotImplementedException();
+            var response = List();
+            response.Students.RemoveAt(index);
         }
     }
 }

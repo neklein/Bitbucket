@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{169D8A38-17B7-4CDB-942B-4429922A83C9}</ProjectGuid>
+    <ProjectGuid>{24BFE2B3-384C-48AD-9E53-3691E0B44CAF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentManagement.BLL</RootNamespace>
-    <AssemblyName>StudentManagement.BLL</AssemblyName>
+    <RootNamespace>RPS.Test</RootNamespace>
+    <AssemblyName>RPS.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,13 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\StudentRepository.cs" />
-    <Compile Include="Helpers\ConsoleIO.cs" />
-    <Compile Include="Logic Control.cs" />
-    <Compile Include="Models\ListStudentResponses.cs" />
-    <Compile Include="Models\Student.cs" />
+    <Compile Include="AlwaysPaper.cs" />
+    <Compile Include="AlwaysRock.cs" />
+    <Compile Include="AlwaysScissors.cs" />
+    <Compile Include="GameManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workflows\EditStudentWorkflow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RPS.BLL\RPS.BLL.csproj">
+      <Project>{c0c872c1-78c8-4ab9-ba2d-2b70d765a7a7}</Project>
+      <Name>RPS.BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

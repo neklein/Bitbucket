@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibraryForPracticeItems;
 
-namespace Practice1
+namespace RPS.BLL
 {
-    class Program
+    public class AlwaysScissors : IChoiceGetter
     {
-        public static void Main()
+        public Choice GetChoice()
         {
-
+            return Choice.Scissors;
         }
     }
 }

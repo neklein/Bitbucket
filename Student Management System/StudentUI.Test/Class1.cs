@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibraryForPracticeItems;
 
-namespace Practice1
+namespace StudentUI.Test
 {
-    class Program
+    public class Class1
     {
-        public static void Main()
-        {
-
-        }
     }
 }

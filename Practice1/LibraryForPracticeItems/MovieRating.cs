@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LibraryForPracticeItems;
 
-namespace Practice1
+namespace LibraryForPracticeItems
 {
-    class Program
+    public class MovieRating
     {
-        public static void Main()
-        {
+        List<MovieRating> movies = new List<MovieRating>();
 
-        }
     }
 }
