@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
+using Microsoft.Practices.Unity;
 
 namespace RPS.UI
 {
@@ -12,7 +14,7 @@ namespace RPS.UI
         public void Start()
         {
             Choice player1Choice;
-            GameManager gm = new GameManager(new RandomChoice());
+            GameManager gm = DIContainer.Container.Resolve<GameManager>();
 
             while(true)
             {

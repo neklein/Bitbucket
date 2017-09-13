@@ -65,7 +65,7 @@ namespace StudentManagement.BLL.Data
         {
             using(StreamWriter sw = new StreamWriter(_filePath, true))
             {
-                string line = string.Format("{0},{1},{2},{3}", student.FirstName, student.LastName, student.Major, student.GPA.ToString());
+                string line = CreateCsvForStudent(student);
 
                 sw.WriteLine(line);
             }
@@ -74,14 +74,39 @@ namespace StudentManagement.BLL.Data
         public void Edit(Student student, int index)
         {
             var response = List();
-            response.Students[index] = student;
+
+            students[index] = student;
+
+            CreateStudentFile(students);
 
         }
 
         public void Delete(int index)
         {
             var response = List();
-            response.Students.RemoveAt(index);
+            students.RemoveAt(index);
+
+            CreateStudentFile(students);
+        }
+
+        private string CreateCsvForStudent(Student student)
+        {
+            return string.Format("{0},{1},{2},{3}", student.FirstName, 
+                student.LastName, student.Major, student.GPA.ToString());
+        }
+        private void CreateStudentFile(List<Student> students)
+        {
+            if (File.Exists(_filePath))
+                File.Delete(_filePath);
+
+            using (StreamWriter sr = new StreamWriter(_filePath))
+            {
+                sr.WriteLine("FirstName,LastName,Major,GPA");
+                foreach(var student in students)
+                {
+                    sr.WriteLine(CreateCsvForStudent(student));
+                }
+            }
         }
     }
 }

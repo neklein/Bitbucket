@@ -70,5 +70,24 @@ namespace StudentManagement.Test
             Assert.AreEqual("Research", check.Major);
             Assert.AreEqual(3.2M, check.GPA);
         }
+
+        [Test]
+        public void CanDeleteStudent()
+        {
+            StudentRepository repo = new StudentRepository(_filePath);
+            repo.Delete(0);
+
+            List<Student> students = repo.List();
+
+            Student check = students[0];
+
+
+        }
+
+        [Test]
+        public void CanEditStudent()
+        {
+
+        }
     }
 }

@@ -9,6 +9,12 @@ namespace BirthdayTracker.UI
 {
     public class ProgramFlow
     {
+        private IFriendList ListOFriends { get; set; }
+        public ProgramFlow(IFriendList list)
+        {
+            ListOFriends = list;
+        }
+
         public void Start()
         {
             ConsoleOutput.DisplayMessage();
@@ -36,7 +42,6 @@ namespace BirthdayTracker.UI
                 //////    Birthday = DateTime.Parse("9/17/1980")
                 //////};
 
-                FriendList ListOfFriends = new FriendList();
                 //ListOfFriends.AddFriendToList(first);
                 //ListOfFriends.AddFriendToList(second);
                 //ListOfFriends.AddFriendToList(third);
@@ -45,7 +50,7 @@ namespace BirthdayTracker.UI
                 DateTime date = ConsoleInput.AskForBirthday();
                 ConsoleOutput.DisplayFriendHeader();
 
-                foreach (Friend friend in ListOfFriends.GetFriendByBirthday(date))
+                foreach (Friend friend in ListOFriends.GetFriendByBirthday(date))
                 {
                     ConsoleOutput.DisplayFriend(friend);
                 }

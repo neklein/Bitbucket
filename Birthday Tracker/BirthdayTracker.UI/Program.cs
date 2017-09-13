@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BirthdayTracker.BLL.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,20 @@ namespace BirthdayTracker.UI
     {
         static void Main(string[] args)
         {
-            ProgramFlow birthdayFlow = new ProgramFlow();
-            birthdayFlow.Start();
+            try
+            {
+                ProgramFlow birthdayFlow = new ProgramFlow(FriendListFactory.Create());
+                birthdayFlow.Start();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Program is not configured correctly - contact support");
+                Console.WriteLine($"Exception message: {ex.Message}");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+               
+            }
         }
     }
 }

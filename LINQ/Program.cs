@@ -874,19 +874,20 @@ namespace LINQ
         /// Print a list of categories that have at least one product out of stock
         /// </summary>
         static void Exercise24()
+
         {
             List<Product> GetProduct = DataLoader.LoadProducts();
 
             var categoryAtZero = (from product in GetProduct
                                  where product.UnitsInStock == 0
                                  orderby product.Category
-                                 select product.Category).ToArray();
+                                 select product.Category).Distinct();
 
-            for (int i = 1; i < categoryAtZero.Length; i++)
+            foreach(var product in categoryAtZero)
             {
-                if(categoryAtZero[i] != categoryAtZero[i - 1])
-                Console.WriteLine(categoryAtZero[i]);
+                Console.WriteLine(product);
             }
+            
         }
 
         /// <summary>

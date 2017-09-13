@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace BirthdayTracker.BLL.Data
 {
-    public class FriendList
+    public class FriendListFileImpl : IFriendList
     {
         private Dictionary<DateTime, List<Friend>> MyFriendList { get; set; }
         private string fileName = @".\Friends.txt";
 
-        public FriendList()
+        public FriendListFileImpl()
         {
             MyFriendList = new Dictionary<DateTime, List<Friend>>();
             if (!File.Exists(fileName))

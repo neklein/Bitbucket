@@ -42,11 +42,15 @@
   <ItemGroup>
     <Compile Include="Data\StudentRepository.cs" />
     <Compile Include="Helpers\ConsoleIO.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Logic Control.cs" />
     <Compile Include="Models\ListStudentResponses.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workflows\AddStudentWorkflow.cs" />
     <Compile Include="Workflows\EditStudentWorkflow.cs" />
+    <Compile Include="Workflows\ListStudentWorkflow.cs" />
+    <Compile Include="Workflows\RemoveStudentWorkflow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
