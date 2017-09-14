@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NateRPS.BLL
+namespace GuessingGame.BLL
 {
-    public enum RPSChoices
+    public enum GuessResult
     {
-        Rock,
-        Paper,
-        Scissors
+        Invalid,
+        Lower,
+        Higher,
+        Victory
     }
 }

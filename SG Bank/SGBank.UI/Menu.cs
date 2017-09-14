@@ -24,8 +24,30 @@ namespace SGBank.UI
                 Console.Write("\nEnter selection: ");
 
                 string userinput = Console.ReadLine();
+                //add info using this example:
+                //string input;
 
-                switch (userinput)
+                //while (true)
+                //{
+                //    Console.Write("Enter your choice (R)ock, (P)aper, or (S)cissors: ");
+                //    input = Console.ReadLine();
+
+                //    switch (input.ToUpper())
+                //    {
+                //        case "R":
+                //            return Choice.Rock;
+                //        case "P":
+                //            return Choice.Paper;
+                //        case "S":
+                //            return Choice.Scissors;
+                //    }
+
+                //    Console.WriteLine("That was not a valid choice! Try R, P, or S!");
+                //    Console.WriteLine("Press any key to continue...");
+                //    Console.ReadKey();
+                //}
+
+                switch (userinput.ToUpper())
                 {
                     case "1":
                         AccountLookupWorkflow lookupWorkflow = new AccountLookupWorkflow();

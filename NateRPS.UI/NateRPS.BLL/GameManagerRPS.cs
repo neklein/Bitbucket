@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NateRPS.BLL
 {
-    class GameManager
+    public class GameManagerRPS
     {
+        //create a system that allows Rock, Paper, and Scissors to interact
     }
 }

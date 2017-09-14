@@ -45,8 +45,11 @@
     <Compile Include="AccountManagerFactory.cs" />
     <Compile Include="DepositRules\DepositRulesFactory.cs" />
     <Compile Include="DepositRules\FreeAccountDepositRule.cs" />
+    <Compile Include="DepositRules\NoLimitDepositRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WithdrawalRules\AccountWithdrawalRules.cs" />
+    <Compile Include="WithdrawalRules\BasicAccountWithdrawalRules.cs" />
+    <Compile Include="WithdrawalRules\FreeAccountWithdrawalRules.cs" />
+    <Compile Include="WithdrawalRules\PremiumAccountWithdrawalRules.cs" />
     <Compile Include="WithdrawalRules\WithdrawalRulesFactory.cs" />
   </ItemGroup>
   <ItemGroup>

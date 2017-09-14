@@ -15,11 +15,11 @@ namespace SGBank.BLL.WithdrawalRules
             switch (type)
             {
                 case AccountType.Free:
-                    return new AccountWithdrawalRules();
+                    return new FreeAccountWithdrawalRules();
                 case AccountType.Basic:
-                    return new AccountWithdrawalRules();
+                    return new BasicAccountWithdrawalRules();
                 case AccountType.Premium:
-                    return new AccountWithdrawalRules();
+                    return new PremiumAccountWithdrawalRules();
 
             }
             throw new Exception("Account type is not supported!");

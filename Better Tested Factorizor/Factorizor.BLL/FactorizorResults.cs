@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Factorizor.BLL
 {
-    public class FactorizorResults
+    public class FactorizorResults : IFactorizor
     {
+        public IFactorizor FactorizorBehavior { get; set; }
 
-        public int[] PrintFactors(int number)
+        public void IsPrimeNumber(int number)
         {
             int Sum = 0;
             int[] Factors = new int[0];
@@ -32,17 +33,15 @@ namespace Factorizor.BLL
             }
 
             Console.WriteLine($"The factors of {number} are: ");
-            for(int i = 0; i<Factors.Length; i++)
+            for (int i = 0; i < Factors.Length; i++)
             {
                 Console.Write($"{Factors[i]}, ");
             }
 
             Console.WriteLine();
-            return Factors;
-
         }
 
-        public int PerfectNumber(int number)
+        public void PerfectNumber(int number)
         {
             int sum = 0;
             for (int i = 1; i < number; i++)
@@ -62,24 +61,23 @@ namespace Factorizor.BLL
                 Console.WriteLine($"{number} is not a perfect number.");
             }
 
-            return sum;
         }
 
-        public int IsPrimeNumber(int number)
+        public int PrintFactors(int number)
         {
-            int NumOfFactors = 0;
+            int numOfFactors = 0;
             for (int i = 2; i < number - 1; i++)
             {
                 if (number % i == 0)
-                    NumOfFactors ++;
+                    numOfFactors++;
             }
-            if (NumOfFactors > 0)
+            if (numOfFactors > 0)
                 Console.WriteLine(number + " is not a prime number");
             else
                 Console.WriteLine(number + " is a prime number");
 
-            return NumOfFactors;
-        }
+            return numOfFactors;
 
+        }
     }
 }

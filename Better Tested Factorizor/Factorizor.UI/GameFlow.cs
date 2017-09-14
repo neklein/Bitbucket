@@ -19,7 +19,6 @@ namespace Factorizor.UI
             ConsoleOutput.DisplayWelcome();
 
             int SomeInt;
-            int[] factor;
 
 
             while(true)
@@ -27,7 +26,7 @@ namespace Factorizor.UI
                 SomeInt = ConsoleInput.GetIntFromUser();
 
                 
-               factor = _displayresults.PrintFactors(SomeInt);
+               _displayresults.PrintFactors(SomeInt);
                 _displayresults.PerfectNumber(SomeInt);
                 _displayresults.IsPrimeNumber(SomeInt);
                 Console.ReadKey();

@@ -8,28 +8,31 @@ using SGBank.Models;
 
 namespace SGBank.Data
 {
-    public class FreeAccountTestRepository : IAccountRepository
+    public class BasicAccountTestRepository : IAccountRepository
     {
         private static Account _account = new Account()
         {
-            Name = "Free Account",
-            Balance = 100.00M,
-            AccountNumber = "12345",
-            Type = AccountType.Free
+            Name = "Basic Account",
+            Balance = 100M,
+            AccountNumber = "33333",
+            Type = AccountType.Basic
         };
+
         public Account LoadAccount(string AccountNumber)
         {
-            if(AccountNumber != _account.AccountNumber)
+            if (AccountNumber != _account.AccountNumber)
             {
                 return null;
             }
             else
                 return _account;
+
         }
 
         public void SaveAccount(Account account)
         {
             _account = account;
+
         }
     }
 }

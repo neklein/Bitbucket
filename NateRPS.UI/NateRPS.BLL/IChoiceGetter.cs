@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace NateRPS.BLL
 {
-    class IChoiceGetter
+    public interface IChoiceGetter
     {
+        RPSChoices AccessChoice();
     }
 }
