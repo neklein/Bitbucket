@@ -36,7 +36,7 @@ namespace SGBank.BLL
             }
             return response;
         }
-
+        //try catch - out of range?
         public AccountDepositReponse Deposit(string accountNumber, decimal amount)
         {
             AccountDepositReponse response = new AccountDepositReponse();

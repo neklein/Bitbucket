@@ -18,7 +18,7 @@ namespace SGBank.Data
         private List<Account> _getAllAccounts()
         {
             List<Account> accounts = new List<Account>();
-
+            //try catch here? Could catch out of range exception
             using (StreamReader sr = new StreamReader(_liveAccounts))
             {
                 sr.ReadLine();
@@ -116,7 +116,7 @@ namespace SGBank.Data
         {
             account = account1;
             List<Account> accounts = _getAllAccounts();
-
+            //when it goes to save, could catch an exception here.
             accounts[account.index] = account;
             _createAccountFile(accounts);
 

@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlooringMastery.UI
+namespace FlooringMastery.Models.Interfaces
 {
-    class Program
+    public class IAddOrder
     {
-        static void Main(string[] args)
-        {
-            Menu.Start();
-        }
     }
 }

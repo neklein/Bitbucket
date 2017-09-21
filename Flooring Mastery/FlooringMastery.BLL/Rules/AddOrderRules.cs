@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlooringMastery.Data
+namespace FlooringMastery.BLL.Rules
 {
-    public class Settings
+    class AddOrderRules
     {
-        //filepaths
     }
 }

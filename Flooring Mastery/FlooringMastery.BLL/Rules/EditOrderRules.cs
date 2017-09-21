@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlooringMastery.UI.Workflows
+namespace FlooringMastery.BLL.Rules
 {
-    class ProductLookupWorkflow
+    class EditOrderRules
     {
     }
 }
