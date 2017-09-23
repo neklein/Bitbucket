@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using FlooringMastery.Models.Interfaces;
 
 namespace FlooringMastery.Data.Repositories
 {
     //Reading and writing to Order file
-    public class ProductionFlooringRepository
+    public class ProductionFlooringRepository: IOrderRepository
     {
         ProductRepository productRepository = new ProductRepository();
         TaxRepository taxRepository = new TaxRepository();
@@ -97,8 +98,8 @@ namespace FlooringMastery.Data.Repositories
             var orders = DisplayOrders(orderDate);
 
             var orderToEdit = (from order1 in orders
-                                       where order1.OrderNumber == orderNumber
-                                       select orders.IndexOf(order1)).FirstOrDefault();
+                              where order1.OrderNumber == orderNumber
+                              select orders.IndexOf(order1)).FirstOrDefault();
             orders[orderToEdit] = order;
 
             CreateOrderFile(orders, orderDate);

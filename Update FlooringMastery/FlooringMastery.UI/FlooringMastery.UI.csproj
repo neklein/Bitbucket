@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3B7BC9EF-77AC-48A1-83A5-2F0B745D2E04}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FlooringMastery.BLL</RootNamespace>
-    <AssemblyName>FlooringMastery.BLL</AssemblyName>
+    <ProjectGuid>{D9DFD2B8-D44E-48A2-8A7E-D45462D9D517}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>FlooringMastery.UI</RootNamespace>
+    <AssemblyName>FlooringMastery.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,15 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrderManager.cs" />
-    <Compile Include="OrderManagerFactory.cs" />
+    <Compile Include="Helpers\ConsoleIO.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Menu.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\AddOrderRules.cs" />
-    <Compile Include="Rules\EditOrderRules.cs" />
+    <Compile Include="Workflows\AddOrderWorkflow.cs" />
+    <Compile Include="Workflows\EditOrderWorkflow.cs" />
+    <Compile Include="Workflows\DisplayOrderWorkflow.cs" />
+    <Compile Include="Workflows\RemoveOrderWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlooringMastery.BLL\FlooringMastery.BLL.csproj">
+      <Project>{3b7bc9ef-77ac-48a1-83a5-2f0b745d2e04}</Project>
+      <Name>FlooringMastery.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">
-      <Project>{7EFAFF1D-84E0-4064-8BFB-58FABA3004A2}</Project>
+      <Project>{7efaff1d-84e0-4064-8bfb-58faba3004a2}</Project>
       <Name>FlooringMastery.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\FlooringMastery.Models\FlooringMastery.Models.csproj">
