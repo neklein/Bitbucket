@@ -20,13 +20,11 @@ namespace FlooringMastery.UI.Helpers
 
         public static void PrintOrderListSummary(Order order)
         {
-            string line = "{0, -15}{1, -15}";
-
             Console.WriteLine(SeparatorBar);
-            Console.WriteLine(line, order.OrderNumber, order.OrderDate);
             Console.WriteLine($"Customer Name: {order.CustomerName}");
             Console.WriteLine($"State: {order.OrderTax.StateAbbreviation}");
             Console.WriteLine($"Product: {order.OrderProduct.ProductType}");
+            Console.WriteLine($"Area: {order.Area}");
             Console.WriteLine($"Materials: {order.MaterialCost}");
             Console.WriteLine($"Labor: {order.LaborCost}");
             Console.WriteLine($"Tax: {order.Tax}");
@@ -145,7 +143,7 @@ namespace FlooringMastery.UI.Helpers
 
                 if (!int.TryParse(Input, out int output))
                 {
-                    Console.WriteLine("That is not a valid order number.");
+                    Console.WriteLine("That is not a possible number.");
                     Console.WriteLine("Press any key to continue");
                     Console.ReadKey();
                 }

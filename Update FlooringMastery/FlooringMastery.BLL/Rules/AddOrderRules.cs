@@ -21,7 +21,7 @@ namespace FlooringMastery.BLL.Rules
         {
 
 
-            if (DateTime.TryParse(dateTime, out DateTime output) == false)
+            if (!DateTime.TryParse(dateTime, out DateTime output))
             {
                 Console.WriteLine("That is not a valid date");
                 Console.WriteLine("Press any key to continue...");
@@ -65,7 +65,6 @@ namespace FlooringMastery.BLL.Rules
                 {
                     order.OrderTax.TaxRate = tax.TaxRate;
                     order.OrderTax.StateName = tax.StateName;
-                    Console.WriteLine($"You have selected {tax.StateName}");
                 }
                 response.Success = true;
             }
@@ -96,7 +95,6 @@ namespace FlooringMastery.BLL.Rules
                 {
                     order.OrderProduct.CostPerSquareFoot = product.CostPerSquareFoot;
                     order.OrderProduct.LaborCostPerSquareFoot = product.LaborCostPerSquareFoot;
-                    Console.WriteLine($"You have selected {product.ProductType}");
 
                 }
                 response.Success = true;

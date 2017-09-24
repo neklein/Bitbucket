@@ -10,5 +10,8 @@ namespace FlooringMastery.Models.Interfaces
     {
         List<Order> DisplayOrders(string OrderDate);
         void AddOrder(Order order);
+        void RemoveOrder(string orderDate, int orderNumber);
+        void EditOrder(Order order, string orderDate, decimal orderNumber);
+
     }
 }

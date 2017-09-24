@@ -57,9 +57,13 @@ namespace FlooringMastery.BLL
             return response;
         }
 
-        //public OrderDeleteResponse DeleteOrder()
-        //{
-
-        //}
+        public void DeleteOrder(string orderDate, int orderNumber)
+        {
+            _orderRepository.RemoveOrder(orderDate, orderNumber);
+        }
+        public void EditOrder(Order order)
+        {
+            _orderRepository.EditOrder(order, order.OrderDate, order.OrderNumber);
+        }
     }
 }

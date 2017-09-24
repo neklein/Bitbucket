@@ -1,5 +1,9 @@
-﻿using FlooringMastery.Data.Repositories;
+﻿using FlooringMastery.BLL;
+using FlooringMastery.BLL.Rules;
+using FlooringMastery.Data.Repositories;
 using FlooringMastery.Models;
+using FlooringMastery.Models.Interfaces;
+using FlooringMastery.Models.Responses;
 using FlooringMastery.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,113 +18,189 @@ namespace FlooringMastery.UI.Workflows
     {
         public void Execute()
         {
+
+            IEditOrder editOrder = new EditOrderRules();
+            OrderManager manager = OrderManagerFactory.Create();
+            OrderLookupResponse response = new OrderLookupResponse();
+
             Console.Clear();
             Console.WriteLine("Edit an Order");
-            ProductionFlooringRepository repo = new ProductionFlooringRepository();
-
+            Console.WriteLine(ConsoleIO.SeparatorBar);
             //need to use the orderDate to grab a file
             string orderDate;
-            List<Order> orders;
             while (true)
             {
                 string getDate = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.DatePrompt);
-                orderDate = string.Format($"{getDate: MMddyyyy}").Trim(' ');
-                orders = repo.DisplayOrders(orderDate);
 
-                var confirmOrderDate = (from order in orders
-                                        where order.OrderDate == orderDate
-                                        select order).FirstOrDefault();
-                if (confirmOrderDate == null)
+                DateTime date = editOrder.VerifyOrderDate(getDate, response);
+                if (!response.Success)
                 {
-                    Console.WriteLine("That is not a valid order date.");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
-                else break;
-            }
-
-
-            int orderNumber;
-            Order orderToEdit = new Order();
-            orderToEdit.OrderTax = new Tax();
-            orderToEdit.OrderProduct = new Products();
-            while (true)
-            {
-                orderNumber = ConsoleIO.GetRequiredOrderNumberFromUser(ConsoleIO.OrderNumberPrompt);
-                var confirmOrderNumber = (from order in orders
-                                          where order.OrderNumber == orderNumber
-                                          select order).FirstOrDefault();
-                if (confirmOrderNumber == null)
-                {
-                    Console.WriteLine("That is not a valid order number.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                 }
                 else
                 {
-                    ConsoleIO.PrintOrderListSummary(confirmOrderNumber);
-                    orderToEdit = confirmOrderNumber;
+                    orderDate = string.Format($"{date: MMddyyyy}").Trim(' ');
+
                     break;
                 }
+
             }
 
-            Console.WriteLine("If you do not wish to change the Customer Name, State, Product Type," +
-                    " or Area, then just press Enter to leave the old value.");
-            string newName = ConsoleIO.GetRequiredStringFromUser($"Edit Customer Name({orderToEdit.CustomerName}): ");
-            if(newName == "")
+            Order newOrder = new Order();
+
+            response = manager.LoadOrders(orderDate);
+            if (response.Success)
             {
-                Console.WriteLine($"The Customer Name is still {orderToEdit.CustomerName}.");
+                while (true)
+                {
+                    newOrder.OrderNumber = ConsoleIO.GetRequiredOrderNumberFromUser("Please enter your order number: ");
+                    var particularOrder = from order in response.Orders
+                                          where order.OrderNumber == newOrder.OrderNumber
+                                          select order;
+                    if (!particularOrder.Any())
+                    {
+                        response.Success = false;
+                        response.Message = "No order exists with that Order Number";
+                        Console.WriteLine("An Error occured");
+                        Console.WriteLine(response.Message);
+
+                    }
+                    else
+                    {
+                        foreach(var orderPiece in particularOrder)
+                        {
+                            newOrder = orderPiece;
+                            response.Success = true;
+                        }
+                        ConsoleIO.PrintOrderListSummary(newOrder);
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+                        Console.Clear();
+
+                        break;
+                    }
+                }
+
             }
             else
             {
-                orderToEdit.CustomerName = newName;
+                Console.WriteLine("An Error occured");
+                Console.WriteLine(response.Message);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+
+            }
+
+            while (response.Success)
+            {
+                Console.WriteLine("If you do not wish to change the Customer Name, State, Product Type," +
+                    " or Area, then just re-type the same information again.");
+                string newName = ConsoleIO.GetRequiredStringFromUser($"Edit Customer Name({newOrder.CustomerName}): ");
+                newOrder.CustomerName = newName;
                 Console.WriteLine($"The Customer Name is now {newName}.");
 
-            }
-            string newState = ConsoleIO.GetRequiredStringFromUser($"Edit Order State({orderToEdit.OrderTax.StateAbbreviation}): ");
-            if (newState == "")
-            {
-                Console.WriteLine($"The Customer State is still {orderToEdit.OrderTax.StateAbbreviation}.");
-            }
-            else
-            {
-                orderToEdit.OrderTax.StateAbbreviation = newState;
-                Console.WriteLine($"The Customer State is now {newState}.");
 
-            }
+                while (true)
+                {
+                    Console.Clear();
 
-            string newProductType = ConsoleIO.GetRequiredStringFromUser($"Edit Order Product Type({orderToEdit.OrderProduct.ProductType}): ");
-            if (newProductType == "")
-            {
-                Console.WriteLine($"The Order Product Type is still {orderToEdit.OrderProduct.ProductType}.");
-            }
-            else
-            {
-                orderToEdit.OrderProduct.ProductType = newProductType;
-                Console.WriteLine($"The Order Product Type is now {newProductType}.");
+                    Console.WriteLine(ConsoleIO.SeparatorBar);
 
-            }
+                    Console.WriteLine("The states we service");
+                    TaxRepository taxRepository = new TaxRepository();
+                    List<Tax> Tax = taxRepository.DisplayTax();
+                    Console.WriteLine(ConsoleIO.SeparatorBar);
 
-            decimal newArea = ConsoleIO.GetRequiredDecimalFromUser($"Edit Order Area({orderToEdit.Area}) or enter the same area to keep it the same: ");
-            Console.WriteLine($"The Order Area is {newArea}.");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-            
-            string answer = ConsoleIO.GetYesNoAnswerFromUser($"Are you sure you want to edit {orderNumber}?");
+                    Console.WriteLine("{0, -15}{1, 10}", "Abbreviation", "State Tax Rate");
+                    foreach (var tax in Tax)
+                    {
+                        ConsoleIO.PrintStateTaxes(tax);
+                    }
+                    Console.WriteLine(ConsoleIO.SeparatorBar);
 
-            if (answer == "Y")
-            {
-                repo.EditOrder(orderToEdit, orderDate, orderNumber);
-                Console.WriteLine("Order edited!");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-            else
-            {
-                Console.WriteLine("Order edit cancelled");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                    string newState = ConsoleIO.GetRequiredStringFromUser($"Edit Customer State({newOrder.OrderTax.StateAbbreviation}): ");
+                    editOrder.VerifyOrderState(newOrder, newState, response);
+                    if (response.Success == false)
+                    {
+                        Console.WriteLine(response.Message);
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
 
+                    }
+                    else
+                    {
+                        newOrder.OrderTax.StateAbbreviation = newState;
+                        break;
+                    }
+
+                }
+
+                while (true)
+                {
+                    Console.Clear();
+
+                    ProductRepository productRepository = new ProductRepository();
+                    Console.WriteLine("Products for sale");
+                    List<Products> ProductList = productRepository.DisplayProduct();
+                    Console.WriteLine(ConsoleIO.SeparatorBar);
+                    Console.WriteLine("{0, -30}{1,-25}{2,5}", "Product Type", "Cost Per Square Feet", "Labor Cost Per Square Feet");
+                    foreach (var product in ProductList)
+                    {
+                        ConsoleIO.PrintProductList(product);
+
+                    }
+                    Console.WriteLine(ConsoleIO.SeparatorBar);
+
+                    string orderProductType = ConsoleIO.GetRequiredStringFromUser($"Edit Order Product({newOrder.OrderProduct.ProductType}): ");
+                    editOrder.VerifyProduct(newOrder, orderProductType, response);
+                    if (response.Success == false)
+                    {
+                        Console.WriteLine(response.Message);
+                        Console.WriteLine("Press any key to continue...");
+                        Console.ReadKey();
+
+                    }
+                    else
+                    {
+                        newOrder.OrderProduct.ProductType = orderProductType;
+                        break;
+                    }
+
+                }
+
+                while (true)
+                {
+                    decimal orderArea = ConsoleIO.GetRequiredDecimalFromUser($"Edit Product Area({newOrder.Area}): ");
+                    newOrder.Area = orderArea;
+                    editOrder.VerifyArea(newOrder, response);
+                    if (response.Success == false)
+                    {
+                        Console.WriteLine(response.Message);
+                    }
+                    else break;
+                }
+
+                editOrder.EditOrder(response, newOrder);
+                ConsoleIO.PrintOrderListSummary(newOrder);
+
+                string answer = ConsoleIO.GetYesNoAnswerFromUser($"Are you sure you want to edit Order Number: {newOrder.OrderNumber}?");
+
+                if (answer == "Y")
+                {
+                    manager.EditOrder(newOrder);
+                    Console.WriteLine("Order edited!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Order edit cancelled");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+
+                }
+                break;
             }
 
         }

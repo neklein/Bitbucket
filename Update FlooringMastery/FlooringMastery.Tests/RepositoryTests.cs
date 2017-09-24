@@ -8,6 +8,8 @@ using FlooringMastery.Data;
 using FlooringMastery.Models;
 using System.IO;
 using FlooringMastery.Data.Repositories;
+using FlooringMastery.BLL;
+using FlooringMastery.Models.Responses;
 
 namespace FlooringMastery.Tests
 {
@@ -15,11 +17,8 @@ namespace FlooringMastery.Tests
     [TestFixture]
     public class RepositoryTests
     {
-        private static string _filePathOrder = @"C:\repos\Bitbucket\Data\FlooringMasteryData\OrdersTest_06012013.txt";
+        private static string _filePathOrder = @"C:\repos\Bitbucket\Data\FlooringMasteryData\Orders_06012013.txt";
         private const string _originalData = @"C:\repos\Bitbucket\Data\FlooringMasteryData\OrdersTestSeed_06012013.txt";
-
-        private static string _filePathProducts = @"C:\repos\Bitbucket\Data\FlooringMasteryData\ProductsTest.txt";
-        private static string _filePathTaxes = @"C:\repos\Bitbucket\Data\FlooringMasteryData\TaxesTest.txt";
 
         [SetUp]
         public void Setup()
@@ -33,23 +32,23 @@ namespace FlooringMastery.Tests
         [Test]
         public void CanReadDataFromFile()
         {
-            ProductionFlooringRepository repo = new ProductionFlooringRepository();
+            OrderLookupResponse response = new OrderLookupResponse();
+            OrderManager orderManager = OrderManagerFactory.Create();
+            response = orderManager.LoadOrders("06012013");
 
-            List<Order> orders = repo.DisplayOrders("06012013");
+            Assert.AreEqual(1, response.Orders.Count());
 
-            Assert.AreEqual(1, orders.Count());
-
-            Order check = orders[0];
+            Order check = response.Orders[0];
             Assert.AreEqual(1, check.OrderNumber);
             Assert.AreEqual("Wise", check.CustomerName);
             Assert.AreEqual("OH", check.OrderTax.StateAbbreviation);
             Assert.AreEqual(6.25M, check.OrderTax.TaxRate);
             Assert.AreEqual("Wood", check.OrderProduct.ProductType);
-            Assert.AreEqual(100.00M, check.Area);
+            Assert.AreEqual(100M, check.Area);
             Assert.AreEqual(5.15M, check.OrderProduct.CostPerSquareFoot);
             Assert.AreEqual(4.75M, check.OrderProduct.LaborCostPerSquareFoot);
-            Assert.AreEqual(515.00M, check.MaterialCost);
-            Assert.AreEqual(475.00M, check.LaborCost);
+            Assert.AreEqual(515M, check.MaterialCost);
+            Assert.AreEqual(475M, check.LaborCost);
             Assert.AreEqual(61.88M, check.Tax);
             Assert.AreEqual(1051.88M, check.Total);
         }
@@ -102,27 +101,29 @@ namespace FlooringMastery.Tests
         [Test]
         public void CanDeleteOrder()
         {
-            ProductionFlooringRepository repo = new ProductionFlooringRepository();
-            string orderDate = string.Format($"{(DateTime.Parse("06/01/2013")).ToString():MMddYYY}").Trim(' ');
-            repo.DeleteOrder(orderDate,1);
+            OrderManager orderManager = OrderManagerFactory.Create();
+            DateTime orderDate = DateTime.Parse("06/01/2013");
+            string date = string.Format($"{orderDate: MMddyyyy}").Trim(' ');
+            orderManager.DeleteOrder(date,226);
+            OrderLookupResponse response = new OrderLookupResponse();
+            response = orderManager.LoadOrders(date);
 
-            List<Order> orders = repo.DisplayOrders(orderDate);
 
-            Assert.AreEqual(1, orders.Count);
+            Assert.AreEqual(50, response.Orders.Count());
 
-            Order check = orders[0];
-            Assert.AreEqual(2, check.OrderNumber);
-            Assert.AreEqual("Steve", check.CustomerName);
-            Assert.AreEqual("CA", check.OrderTax.StateAbbreviation);
-            Assert.AreEqual(5M, check.OrderTax.TaxRate);
-            Assert.AreEqual("Vynil", check.OrderProduct.ProductType);
-            Assert.AreEqual(110M, check.Area);
-            Assert.AreEqual(6M, check.OrderProduct.CostPerSquareFoot);
-            Assert.AreEqual(4M, check.OrderProduct.LaborCostPerSquareFoot);
-            Assert.AreEqual(500M, check.MaterialCost);
-            Assert.AreEqual(400M, check.LaborCost);
-            Assert.AreEqual(50M, check.Tax);
-            Assert.AreEqual(950M, check.Total);
+            Order check = response.Orders[0];
+            Assert.AreEqual(225, check.OrderNumber);
+            Assert.AreEqual("Qui-Gon Jinn", check.CustomerName);
+            Assert.AreEqual("MI", check.OrderTax.StateAbbreviation);
+            Assert.AreEqual(5.47M, check.OrderTax.TaxRate);
+            Assert.AreEqual("Bioneural Degeneration Sensor", check.OrderProduct.ProductType);
+            Assert.AreEqual(322M, check.Area);
+            Assert.AreEqual(44M, check.OrderProduct.CostPerSquareFoot);
+            Assert.AreEqual(0M, check.OrderProduct.LaborCostPerSquareFoot);
+            Assert.AreEqual(14168M, check.MaterialCost);
+            Assert.AreEqual(0M, check.LaborCost);
+            Assert.AreEqual(708.40M, check.Tax);
+            Assert.AreEqual(14876.402M, check.Total);
 
         }
 

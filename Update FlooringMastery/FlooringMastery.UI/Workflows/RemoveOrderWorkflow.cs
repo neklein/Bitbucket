@@ -1,5 +1,9 @@
-﻿using FlooringMastery.Data.Repositories;
+﻿using FlooringMastery.BLL;
+using FlooringMastery.BLL.Rules;
+using FlooringMastery.Data.Repositories;
 using FlooringMastery.Models;
+using FlooringMastery.Models.Interfaces;
+using FlooringMastery.Models.Responses;
 using FlooringMastery.UI.Helpers;
 using System;
 using System.Collections.Generic;
@@ -15,67 +19,97 @@ namespace FlooringMastery.UI.Workflows
         {
             Console.Clear();
             Console.WriteLine("Remove an Order");
-            ProductionFlooringRepository repo = new ProductionFlooringRepository();
-            
+            Console.WriteLine(ConsoleIO.SeparatorBar);
+
+            //need to use the orderDate to grab a file
+            IRemoveOrder removeOrder = new RemoveOrderRules();
+            OrderManager manager = OrderManagerFactory.Create();
+            OrderLookupResponse response = new OrderLookupResponse();
+
+            Console.Clear();
+            Console.WriteLine("Edit an Order");
+            Console.WriteLine(ConsoleIO.SeparatorBar);
             //need to use the orderDate to grab a file
             string orderDate;
-            List<Order> orders;
             while (true)
             {
                 string getDate = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.DatePrompt);
-                orderDate = string.Format($"{getDate: MMddyyyy}").Trim(' ');
-                orders = repo.DisplayOrders(orderDate);
 
-                var confirmOrderDate = (from order in orders
-                                        where order.OrderDate == orderDate
-                                        select order).FirstOrDefault();
-                if (confirmOrderDate == null)
+                DateTime date = removeOrder.VerifyOrderDate(getDate, response);
+                if (!response.Success)
                 {
-                    Console.WriteLine("That is not a valid order date.");
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                }
-                else break;
-            }
-
-
-            int orderNumber;
-            while (true)
-            {
-                orderNumber = ConsoleIO.GetRequiredOrderNumberFromUser(ConsoleIO.OrderNumberPrompt);
-                var confirmOrderNumber = (from order in orders
-                                          where order.OrderNumber == orderNumber
-                                          select order).FirstOrDefault();
-                if (confirmOrderNumber == null)
-                {
-                    Console.WriteLine("That is not a valid order number.");
+                    Console.WriteLine(response.Message);
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
                 }
                 else
                 {
-                    ConsoleIO.PrintOrderListSummary(confirmOrderNumber);
+                    orderDate = string.Format($"{date: MMddyyyy}").Trim(' ');
+
                     break;
-                } 
+                }
+
             }
 
+            Order newOrder = new Order();
 
-            string answer = ConsoleIO.GetYesNoAnswerFromUser($"Are you sure you want to remove {orderNumber}?");
-
-            if(answer == "Y")
+            response = manager.LoadOrders(orderDate);
+            if (response.Success)
             {
-                repo.DeleteOrder(orderDate, orderNumber);
-                Console.WriteLine("Order deleted!");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
+                while (true)
+                {
+                    newOrder.OrderNumber = ConsoleIO.GetRequiredOrderNumberFromUser("Please enter your order number: ");
+                    var particularOrder = from order in response.Orders
+                                          where order.OrderNumber == newOrder.OrderNumber
+                                          select order;
+                    if (!particularOrder.Any())
+                    {
+                        response.Success = false;
+                        response.Message = "No order exists with that Order Number";
+                        Console.WriteLine("An Error occured");
+                        Console.WriteLine(response.Message);
+
+                    }
+                    else
+                    {
+                        foreach (var orderPiece in particularOrder)
+                        {
+                            newOrder = orderPiece;
+                            response.Success = true;
+                        }
+                        break;
+                    }
+                }
+
+                string answer = ConsoleIO.GetYesNoAnswerFromUser($"Are you sure you want to remove Order Number {newOrder.OrderNumber}?");
+
+                if (answer == "Y")
+                {
+                    manager.DeleteOrder(newOrder.OrderDate, newOrder.OrderNumber);
+                    Console.WriteLine("Order deleted!");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    Console.WriteLine("Order deletion cancelled");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+
+                }
+
+
             }
             else
             {
-                Console.WriteLine("Order deletion cancelled");
+                Console.WriteLine("An Error occured");
+                Console.WriteLine(response.Message);
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
 
             }
+
+
         }
     }
 }

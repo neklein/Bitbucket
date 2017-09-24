@@ -55,12 +55,16 @@ namespace FlooringMastery.UI.Workflows
                 ConsoleIO.PrintStateTaxes(tax);
             }
             Console.WriteLine(ConsoleIO.SeparatorBar);
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+            Console.Clear();
 
+            DateTime orderDate;
             while (true)
             {
                 string getDate = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.DatePrompt);
 
-                DateTime orderDate = addOrder.VerifyOrderDate(getDate, response);
+                orderDate = addOrder.VerifyOrderDate(getDate, response);
                 if (response.Success == false)
                 {
                     Console.WriteLine(response.Message);
@@ -73,11 +77,27 @@ namespace FlooringMastery.UI.Workflows
 
                 }
             }
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
 
             newOrder.CustomerName = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.customerNamePrompt);
 
             while (true)
             {
+                Console.WriteLine(ConsoleIO.SeparatorBar);
+
+                Console.WriteLine("The states we service");
+                Console.WriteLine(ConsoleIO.SeparatorBar);
+
+                Console.WriteLine("{0, -15}{1, 10}", "Abbreviation", "State Tax Rate");
+                foreach (var tax in Tax)
+                {
+                    ConsoleIO.PrintStateTaxes(tax);
+                }
+                Console.WriteLine(ConsoleIO.SeparatorBar);
+
+
                 newOrder.OrderTax.StateAbbreviation = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.statePrompt);
                 addOrder.VerifyOrderState(newOrder, response);
                 if (response.Success == false)
@@ -87,9 +107,26 @@ namespace FlooringMastery.UI.Workflows
                 else break;
 
             }
+            Console.Clear();
+            Console.WriteLine($"The order date is: {orderDate}");
+            Console.WriteLine($"The customer name is: {newOrder.CustomerName}");
+            Console.WriteLine($"The order state is: {newOrder.OrderTax.StateAbbreviation}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+            Console.Clear();
 
             while (true)
             {
+                Console.WriteLine("Products for sale");
+                Console.WriteLine(ConsoleIO.SeparatorBar);
+                Console.WriteLine("{0, -30}{1,-25}{2,5}", "Product Type", "Cost Per Square Feet", "Labor Cost Per Square Feet");
+                foreach (var product in ProductList)
+                {
+                    ConsoleIO.PrintProductList(product);
+
+                }
+                Console.WriteLine(ConsoleIO.SeparatorBar);
+
                 newOrder.OrderProduct.ProductType = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.productTypePrompt);
                 addOrder.VerifyProduct(newOrder, response);
                 if (response.Success == false)
@@ -100,6 +137,15 @@ namespace FlooringMastery.UI.Workflows
 
             }
 
+            Console.Clear();
+            Console.WriteLine($"The order date is: {orderDate}");
+            Console.WriteLine($"The customer name is: {newOrder.CustomerName}");
+            Console.WriteLine($"The order state is: {newOrder.OrderTax.StateAbbreviation}");
+            Console.WriteLine($"The order product type is: {newOrder.OrderProduct.ProductType}");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+
+            Console.Clear();
             while (true)
             {
                 newOrder.Area = ConsoleIO.GetRequiredDecimalFromUser(ConsoleIO.areaPrompt);
@@ -116,7 +162,8 @@ namespace FlooringMastery.UI.Workflows
             Console.WriteLine(ConsoleIO.SeparatorBar);
 
             Console.Clear();
-
+            string date = newOrder.OrderDate.Substring(0, 2) + "/" + newOrder.OrderDate.Substring(2, 2) + "/" + newOrder.OrderDate.Substring(4, 4);
+            Console.WriteLine("Order Date: ", date);
             ConsoleIO.PrintOrderListSummary(newOrder);
 
             Console.WriteLine();

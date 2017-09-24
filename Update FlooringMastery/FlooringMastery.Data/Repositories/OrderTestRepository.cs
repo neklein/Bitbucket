@@ -30,9 +30,19 @@ namespace FlooringMastery.Data.Repositories
             throw new NotImplementedException();
         }
 
+        public void EditOrder(Order order, string orderDate, decimal orderNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         public Order LoadOrder(string OrderDate)
         {
             return _order;
+        }
+
+        public void RemoveOrder(string orderDate, int orderNumber)
+        {
+            throw new NotImplementedException();
         }
 
         public void SaveOrder(Order order)

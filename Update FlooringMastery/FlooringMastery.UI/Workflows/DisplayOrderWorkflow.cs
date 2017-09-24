@@ -1,7 +1,9 @@
 ﻿using FlooringMastery.BLL;
+using FlooringMastery.BLL.Rules;
 using FlooringMastery.Data;
 using FlooringMastery.Data.Repositories;
 using FlooringMastery.Models;
+using FlooringMastery.Models.Interfaces;
 using FlooringMastery.Models.Responses;
 using FlooringMastery.UI.Helpers;
 using System;
@@ -17,6 +19,10 @@ namespace FlooringMastery.UI.Workflows
     {
         public void Execute()
         {
+            IDisplayOrder displayOrder = new DisplayOrderRules();
+            OrderManager manager = OrderManagerFactory.Create();
+            OrderLookupResponse response = new OrderLookupResponse();
+
             //get list from respository
             //print list
             //get date from user
@@ -25,56 +31,45 @@ namespace FlooringMastery.UI.Workflows
 
             Console.Clear();
 
+            string orderDate;
+            while (true)
+            {
+                orderDate = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.DatePrompt);
+                DateTime date = displayOrder.VerifyOrderDate(orderDate, response);
+                if (!response.Success)
+                {
+                    Console.WriteLine(response.Message);
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
+                else
+                {
+                    orderDate = string.Format($"{date: MMddyyyy}").Trim(' ');
+                    break;
+                }
+            }
 
-            string orderDate = ConsoleIO.GetRequiredStringFromUser(ConsoleIO.DatePrompt);
+            response = manager.LoadOrders(orderDate);
 
-            ProductionFlooringRepository repo = new ProductionFlooringRepository();
-
-            string getDate = string.Format($"{orderDate:MMddyyyy}").Trim(' ');
-
-            //new stuff
-            OrderManager manager = OrderManagerFactory.Create();
-            OrderLookupResponse response = manager.LoadOrders(getDate);
 
             if (response.Success)
             {
-                ConsoleIO.PrintOrderListSummary(response.Order);
+
+                foreach (var order in response.Orders)
+                {
+                    Console.WriteLine($"Order Number: {order.OrderNumber}");
+                    ConsoleIO.PrintOrderListSummary(order);
+                    Console.WriteLine();
+                }
             }
             else
             {
                 Console.WriteLine("An Error occured");
                 Console.WriteLine(response.Message);
-                
+
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
-
-            //old stuff
-            if (File.Exists("C:\\repos\\Bitbucket\\Data\\FlooringMasteryData\\Orders_" + getDate + ".txt"))
-            {
-                List<Order> orders = repo.DisplayOrders(getDate);
-
-                Console.WriteLine("Order List for a particular date");
-
-                foreach (var order in orders)
-                {
-                    ConsoleIO.PrintOrderListSummary(order);
-                    Console.WriteLine();
-                    Console.WriteLine("Press any key to continue ...");
-                    Console.ReadKey();
-
-                }
-
-            }
-            else
-            {
-                Console.WriteLine("There are no orders for that order date.");
-
-                Console.WriteLine();
-                Console.WriteLine("Press any key to continue ...");
-                Console.ReadKey();
-
-            }
 
         }
     }

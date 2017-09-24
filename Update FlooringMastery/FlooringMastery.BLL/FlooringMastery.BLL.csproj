@@ -45,7 +45,9 @@
     <Compile Include="OrderManagerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\AddOrderRules.cs" />
+    <Compile Include="Rules\DisplayOrderRules.cs" />
     <Compile Include="Rules\EditOrderRules.cs" />
+    <Compile Include="Rules\RemoveOrderRules.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlooringMastery.Data\FlooringMastery.Data.csproj">
