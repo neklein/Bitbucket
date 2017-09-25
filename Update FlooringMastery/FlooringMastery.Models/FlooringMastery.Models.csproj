@@ -45,7 +45,6 @@
     <Compile Include="Interfaces\IEditOrder.cs" />
     <Compile Include="Interfaces\IOrderRepository.cs" />
     <Compile Include="Interfaces\IRemoveOrder.cs" />
-    <Compile Include="Interfaces\ITaxRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
