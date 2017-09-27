@@ -29,7 +29,7 @@ namespace FlooringMastery.Data.Repositories
                         string line;
                         while ((line = sr.ReadLine()) != null)
                         {
-
+                            
                             string[] columns = line.Split(',');
 
                             if (int.TryParse(columns[0], out int output))
@@ -41,6 +41,10 @@ namespace FlooringMastery.Data.Repositories
                                 newOrder.OrderDate = date;
                                 newOrder.OrderNumber = output;
                                 newOrder.CustomerName = columns[1];
+                                if (newOrder.CustomerName.Contains('~'))
+                                {
+                                    newOrder.CustomerName = newOrder.CustomerName.Replace('~', ',');
+                                }
                                 newOrder.OrderTax.StateAbbreviation = columns[2];
                                 newOrder.OrderTax.TaxRate = decimal.Parse(columns[3]);
                                 newOrder.OrderProduct.ProductType = columns[4];
@@ -146,6 +150,10 @@ namespace FlooringMastery.Data.Repositories
 
         private string CreateCsvForOrder(Order order)
         {
+            if (order.CustomerName.Contains(','))
+            {
+                order.CustomerName = order.CustomerName.Replace(',', '~');
+            }
             return string.Format($"{order.OrderNumber.ToString()},{order.CustomerName},{order.OrderTax.StateAbbreviation},{order.OrderTax.TaxRate.ToString()}," +
                 $"{order.OrderProduct.ProductType},{order.Area.ToString()},{order.OrderProduct.CostPerSquareFoot.ToString()},{order.OrderProduct.LaborCostPerSquareFoot.ToString()},{order.MaterialCost.ToString()}," +
                 $"{order.LaborCost.ToString()},{order.Tax.ToString()},{order.Total.ToString()}");
