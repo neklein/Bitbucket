@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace NateFirstMVCAPP
+namespace Nate_TipCalculator
 {
     public class RouteConfig
     {
@@ -14,14 +14,9 @@ namespace NateFirstMVCAPP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "ProductSearch",
-                url: "{controller}/{action}/{category}/{subcategory}"
-                );
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Form", action = "CalculateTip", id = UrlParameter.Optional }
             );
         }
     }

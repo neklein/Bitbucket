@@ -1,0 +1,23 @@
+﻿@model NateFirstMVCAPP.Models.WeatherLastWeek
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Temperature</title>
+</head>
+<body>
+    <div> 
+        <h3>In case you forgot that it was cool two weeks ago...</h3>
+        <p>@Model.Date.ToShortDateString() was a cool day! In fact, the only possible description is: @Model.Description Enjoy the heat of today!</p>
+        <div style="background-color:chocolate; color: red;">
+            <p>Don't forget to enjoy the great outdoors!</p>
+        </div>
+    </div>
+</body>
+</html>

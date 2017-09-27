@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace NateFirstMVCAPP
+namespace TractorFanSite
 {
     public class RouteConfig
     {
@@ -14,8 +14,8 @@ namespace NateFirstMVCAPP
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "ProductSearch",
-                url: "{controller}/{action}/{category}/{subcategory}"
+                name:"PathAdd",
+                url: "{controller}/{action}/{Name}/{TractorClass}/{Driver}"
                 );
 
             routes.MapRoute(

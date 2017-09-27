@@ -1,0 +1,38 @@
+﻿@model TractorFanSite.Models.Tractor
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Change Tractor</title>
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div> 
+        <form action="/admin/formaddtractor" method="post">
+            <p>Enter your favorite tractor:</p>
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" class="form-control" name="Name" />
+            </div>
+            <div class="form-group">
+                <label>Class:</label>
+                <input type="text" class="form-control" name="TractorClass" />
+            </div>
+            <div class="form-group">
+                <label>Driver: </label>
+                <input type="text" class="form-control" name="Driver" />
+            </div>
+            <button type="submit" class="btn btn-primary">Update your Tractor</button>
+        </form>
+    </div>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

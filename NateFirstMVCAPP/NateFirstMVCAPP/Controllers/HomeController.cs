@@ -15,6 +15,7 @@ namespace NateFirstMVCAPP.Controllers
         {
             ViewBag.CurrentDateTime = DateTime.Now;
             return View();
+            
         }
 
         [HttpGet]
@@ -27,6 +28,81 @@ namespace NateFirstMVCAPP.Controllers
             weather.Description = "Sunny";
 
             return View(weather);
+        }
+
+        [HttpGet]
+        public ActionResult Temperature()
+        {
+            WeatherLastWeek weather = new WeatherLastWeek();
+            weather.Date = DateTime.Today.AddDays(-10);
+            weather.Description = "Cool for this time of year!";
+
+            return View(weather);
+        }
+
+        [HttpGet]
+        public ActionResult QueryString1()
+        {
+            ProductSearch productSearch = new ProductSearch();
+            productSearch.Category = Request.QueryString["category"];
+            productSearch.Subcategory = Request.QueryString["subcategory"];
+
+            return View("SearchResult", productSearch);
+        }
+
+        [HttpGet]
+        public ActionResult QueryString2(string category, string subcategory)
+        {
+            ProductSearch productSearch = new ProductSearch();
+            productSearch.Category = category;
+            productSearch.Subcategory = subcategory;
+
+            return View("SearchResult", productSearch);
+        }
+
+        [HttpGet]
+        public ActionResult QueryString3(ProductSearch productSearch)
+        {
+            return View("SearchResult", productSearch);
+        }
+
+        [HttpGet]
+        public ActionResult Path1()
+        {
+            var model = new ProductSearch();
+            model.Category = RouteData.Values["category"].ToString();
+            model.Category = RouteData.Values["subcategory"].ToString();
+
+            return View("SearchResult", model);
+        }
+
+        [HttpGet]
+        public ActionResult Path2(string category, string subcategory)
+        {
+            ProductSearch productSearch = new ProductSearch();
+            productSearch.Category = category;
+            productSearch.Subcategory = subcategory;
+
+            return View("SearchResult", productSearch);
+
+        }
+
+        [HttpGet]
+        public ActionResult Path3(ProductSearch productSearch)
+        {
+            return View("SearchResult", productSearch);
+
+        }
+
+        [HttpPost]
+        public ActionResult Form2(string category, string subcategory)
+        {
+            var model = new ProductSearch();
+
+            model.Category = category;
+            model.Subcategory = subcategory;
+
+            return View("SearchResult", model);
         }
     }
 }

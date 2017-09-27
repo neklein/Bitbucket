@@ -8,12 +8,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1DF61750-DCE6-480A-9233-13EA6A497281}</ProjectGuid>
+    <ProjectGuid>{043C19A1-EA60-4A13-A7AB-269AA33EF578}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NateFirstMVCAPP</RootNamespace>
-    <AssemblyName>NateFirstMVCAPP</AssemblyName>
+    <RootNamespace>CollegeVisit</RootNamespace>
+    <AssemblyName>CollegeVisit</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -90,30 +90,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Images\CloudyWeather.gif" />
-    <Content Include="Images\SunnyWeather.jpg" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VisitController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CurrentWeather.cs" />
-    <Compile Include="Models\ProductSearch.cs" />
-    <Compile Include="Models\WeatherLastWeek.cs" />
+    <Compile Include="Models\VisitRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Weather.cshtml" />
-    <Content Include="Views\Home\Temperature.cshtml" />
-    <Content Include="Views\Home\QueryString1.cshtml" />
-    <Content Include="Views\Home\QueryString2.cshtml" />
-    <Content Include="Views\Home\Form2.cshtml" />
+    <Content Include="Views\Visit\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -137,9 +137,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50195</DevelopmentServerPort>
+          <DevelopmentServerPort>57230</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50195/</IISUrl>
+          <IISUrl>http://localhost:57230/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
