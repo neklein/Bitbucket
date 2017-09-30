@@ -1,0 +1,39 @@
+﻿@model Nate_TipCalculator.Models.Tip
+@{
+    ViewBag.Title = "Calculate Tip";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Your Tip Calculator</h2>
+
+
+@using (Html.BeginForm("CalculateTip", "Form", FormMethod.Post))
+{
+    if (ViewData.ModelState.IsValid)
+    {
+        <div name="opening" class="alert alert-info">Enter your tip information:</div>
+    }
+    else
+    {
+        @Html.ValidationSummary();
+    }
+            <div class="form-group">
+                @Html.LabelFor(m => m.MealType)
+                @Html.TextBoxFor(m => m.MealType, new { @class = "form-control", placeholder = "Meal Type" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.MealType)</span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.MealCost)
+                @Html.TextBoxFor(m => m.MealCost, new { @class = "form-control", placeholder = "Meal Cost" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.MealCost)</span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.TipPercentage)
+                @Html.TextBoxFor(m => m.TipPercentage, new { @class = "form-control", placeholder = "Tip Percentage" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.TipPercentage)</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Your Tip Total</button>
+
+
+}
+

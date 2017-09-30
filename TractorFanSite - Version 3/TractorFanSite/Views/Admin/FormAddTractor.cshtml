@@ -1,0 +1,43 @@
+﻿@model TractorFanSite.Models.Tractor
+
+@{
+    ViewBag.Title = "Admin Only";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            alert("Hello Admin");
+        });
+        </script>}
+
+@using (Html.BeginForm("FormAddTractor", "Admin", FormMethod.Post))
+{
+    <h1>This page is admin only! Go away!</h1>
+
+    <p>Enter your favorite tractor:</p>
+                <div class="form-group">
+                    @Html.LabelFor(m=>m.Name)
+                    @Html.TextBoxFor(m=>m.Name, new { @class="form-control", placeholder="Tractor Name"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.TractorClass)
+                    @Html.DropDownListFor(m=>m.TractorClass,
+                   new List<SelectListItem>
+                   {
+                       new SelectListItem{Text = "10,000 Hot Farm", Value="10,000 Hot Farm"},
+                       new SelectListItem{Text = "Hot Rod Tractor", Value="Hot Rod Tractor"},
+                       new SelectListItem {Text = "Super Stock 4x4", Value="Super Stock 4x4"},
+                       new SelectListItem{Text = "Super Modified", Value="Super Modified"}
+                   },
+                   "-Choose your Tractor Class-",
+                   new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Driver)
+                    @Html.TextBoxFor(m => m.Driver, new { @class = "form-control", placeholder = "Driver" })
+                </div>
+                <button type="submit" class="btn btn-primary">Update your Tractor</button>
+
+}

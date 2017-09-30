@@ -1,0 +1,39 @@
+﻿@model Nate_TipCalculator.Models.Tip
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Calculate Your Tip</title>
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <form action="/form/calculatetip" method="post">
+            <p>Enter your tip information:</p>
+            <div class="form-group">
+                <label>Meal Type:</label>
+                <input type="text" class="form-control" name="MealType" />
+            </div>
+            <div class="form-group">
+                <label>Meal Cost:</label>
+                <input type="number" class="form-control" name="MealCost" />
+            </div>
+            <div class="form-group">
+                <label>Tip Percentage(as a decimal): </label>
+                <input type="number" class="form-control" name="TipPercentage" />
+            </div>
+            <button type="submit" class="btn btn-primary">Get Your Tip Total</button>
+        </form>
+
+    </div>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

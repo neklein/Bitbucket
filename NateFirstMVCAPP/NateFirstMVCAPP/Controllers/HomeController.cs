@@ -71,9 +71,9 @@ namespace NateFirstMVCAPP.Controllers
         {
             var model = new ProductSearch();
             model.Category = RouteData.Values["category"].ToString();
-            model.Category = RouteData.Values["subcategory"].ToString();
+            model.Subcategory = RouteData.Values["subcategory"].ToString();
 
-            return View("SearchResult", model);
+            return View("QueryString1", model);
         }
 
         [HttpGet]
@@ -83,7 +83,7 @@ namespace NateFirstMVCAPP.Controllers
             productSearch.Category = category;
             productSearch.Subcategory = subcategory;
 
-            return View("SearchResult", productSearch);
+            return View("Index", "Home");
 
         }
 
@@ -102,7 +102,7 @@ namespace NateFirstMVCAPP.Controllers
             model.Category = category;
             model.Subcategory = subcategory;
 
-            return View("SearchResult", model);
+            return View("QueryString1", "Home");
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model SchedulePrototype.Models.PullDetails
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowPull</title>
+</head>
+<body>
+    <div> 
+        <p>Your track is @Model.Track</p>
+        <p>Your Promoter is @Model.Promoter</p>
+        <p>Your Date is @Model.ScheduledDate.ToString()</p>
+    </div>
+</body>
+</html>

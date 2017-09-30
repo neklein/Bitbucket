@@ -1,0 +1,54 @@
+﻿@model StudentManagementWebsite.Models.Student
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Index</h2>
+<p>
+    Razor can be used to branch or loop HTML statements
+</p>
+@if(DateTime.Today.DayOfWeek == DayOfWeek.Saturday || DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
+{
+    <p>It's the weekend!</p>
+}
+else
+{
+    <p>It's a weekday</p>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <p>
+            Here is the link to the @Html.ActionLink("Add Student View", "AddStudent", "Home")
+        </p>
+    </div>
+</div>
+
+@section Meta {
+    <meta name="description" content="This is the description of the Index View" />
+    }
+
+@section Scripts {
+    <script>
+        $(document).ready(function (){
+            alert('hello! I tire of this index!');
+        });
+    </script>
+    }
+
+<div>
+    <p>Here is the list of other students:</p>
+    <table class="table table-striped">
+        @foreach (var student in StudentManagementWebsite.Models.StudentRepository.GetStudents())
+        {
+            <tr>
+                <td>@student.LastName, @student.FirstName</td>
+                <td>@student.Major</td>
+                <td>@student.GPA</td>
+            </tr>
+
+        }
+    </table>
+</div>
+

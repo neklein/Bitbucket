@@ -1,0 +1,44 @@
+﻿@model StudentManagementWebsite.Models.Student
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>AddStudent</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+            <h1>Add Student</h1>
+            @using(Html.BeginForm("AddStudent", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m=>m.FirstName)
+                    @Html.TextBoxFor(m=>m.FirstName, new { @class = "form-control", placeholder = "First Name"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.TextBoxFor(m=>m.LastName, new { @class = "form-control", placeholder = "Last Name"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Major)
+                    @Html.DropDownListFor(m => m.Major,
+                   new List<SelectListItem>
+                   {
+                       new SelectListItem{Text="Business", Value="Business"},
+                       new SelectListItem{Text="Computer Science", Value="Computer Science"},
+                       new SelectListItem{Text="English", Value="English"},
+                   },
+                   "- Select Major -",
+                   new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.GPA)
+                    @Html.TextBoxFor(m => m.GPA, new { @class = "form-control", placeholder = "GPA" })
+                </div>
+                <button type="submit" class="btn btn-primary">POST</button>
+            }
+        </div>
+    </div>
+</div>
+

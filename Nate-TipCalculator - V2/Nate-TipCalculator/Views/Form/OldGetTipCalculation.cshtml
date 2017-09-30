@@ -1,0 +1,42 @@
+﻿@model Nate_TipCalculator.Models.Tip
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>The Tip Calculation</title>
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div> 
+        <h2>These are the details of your tip!</h2>
+        <table class="table table-hover">
+            <tr>
+                <td><strong>Meal Type</strong></td>
+                <td>@Model.MealType</td>
+            </tr>
+            <tr>
+                <td><strong>Meal Cost</strong></td>
+                <td>@Model.MealCost</td>
+            </tr>
+            <tr>
+                <td><strong>Tip Percentage</strong></td>
+                <td>@Model.TipPercentage</td>
+            </tr>
+            <tr>
+                <td><strong>Tip Total</strong></td>
+                <td>@Model.TipTotalForMeal</td>
+            </tr>
+        </table>
+
+    </div>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

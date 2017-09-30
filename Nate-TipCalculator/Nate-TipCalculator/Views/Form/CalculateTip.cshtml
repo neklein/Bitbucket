@@ -1,39 +1,26 @@
 ﻿@model Nate_TipCalculator.Models.Tip
-
 @{
-    Layout = null;
+    ViewBag.Title = "Calculate Tip";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Calculate Your Tip</title>
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-    <div>
-        <form action="/form/calculatetip" method="post">
-            <p>Enter your tip information:</p>
+@using (Html.BeginForm("CalculateTip", "Form", FormMethod.Post))
+{
+            <h2>Enter your tip information:</h2>
             <div class="form-group">
-                <label>Meal Type:</label>
-                <input type="text" class="form-control" name="MealType" />
+                @Html.LabelFor(m => m.MealType)
+                @Html.TextBoxFor(m => m.MealType, new { @class = "form-control", placeholder = "Meal Type" })
             </div>
             <div class="form-group">
-                <label>Meal Cost:</label>
-                <input type="number" class="form-control" name="MealCost" />
+                @Html.LabelFor(m => m.MealCost)
+                @Html.TextBoxFor(m => m.MealCost, new { @class = "form-control", placeholder = "Meal Cost" })
             </div>
             <div class="form-group">
-                <label>Tip Percentage(as a decimal): </label>
-                <input type="number" class="form-control" name="TipPercentage" />
+                @Html.LabelFor(m => m.TipPercentage)
+                @Html.TextBoxFor(m => m.TipPercentage, new { @class = "form-control", placeholder = "Tip Percentage" })
             </div>
             <button type="submit" class="btn btn-primary">Get Your Tip Total</button>
-        </form>
 
-    </div>
-    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</body>
-</html>
+
+}
+

@@ -1,0 +1,73 @@
+﻿@model StudentManagementWebsite.Models.Student
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Admin Index</h2>
+
+<h3>Students</h3>
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Major</th>
+                    <th>GPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in StudentManagementWebsite.Models.StudentRepository.GetStudents())
+                {
+                    <tr>
+                        <td>@student.LastName, @student.FirstName</td>
+                        <td>@student.Major</td>
+                        <td>@student.GPA</td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        <h2>Here is student that is being added:</h2>
+        <div class="col-xs-4">
+            <table class="table table-hover">
+                <tr>
+                    <td><strong>Student Name</strong></td>
+                    <td>@Model.FirstName @Model.LastName</td>
+                </tr>
+                <tr>
+                    <td><strong>Student Major</strong></td>
+                    <td>@Model.Major</td>
+                </tr>
+                <tr>
+                    <td><strong>Student GPA</strong></td>
+                    <td>@Model.GPA</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<p>
+    Here are the even numbers from 2 to 10
+</p>
+<ul>
+    @for(int i = 2; i<=10; i += 2)
+    {
+        <li>@i</li>
+    }
+</ul>
+<p>
+    Razor can be used to branch or loop HTML statements
+</p>
+@if(DateTime.Today.DayOfWeek == DayOfWeek.Saturday || DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
+{
+    <p>It's the weekend!</p>
+}
+else
+{
+    <p>It's a weekday</p>
+}

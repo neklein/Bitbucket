@@ -114,6 +114,7 @@
     <Content Include="Views\Home\QueryString1.cshtml" />
     <Content Include="Views\Home\QueryString2.cshtml" />
     <Content Include="Views\Home\Form2.cshtml" />
+    <Content Include="Views\Home\Path2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
