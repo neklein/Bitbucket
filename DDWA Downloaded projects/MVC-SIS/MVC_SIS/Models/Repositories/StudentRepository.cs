@@ -78,9 +78,11 @@ namespace Exercises.Models.Repositories
             return _students.FirstOrDefault(s => s.StudentId == studentId);
         }
 
-        public static void Add(Student state)
+        public static void Add(Student student)
         {
-            _students.Add(state);
+            student.StudentId = _students.Max(c => c.StudentId) + 1;
+
+            _students.Add(student);
         }
 
         public static void Edit(Student student)
@@ -102,7 +104,14 @@ namespace Exercises.Models.Repositories
         public static void SaveAddress(int studentId, Address address)
         {
             var selectedStudent = _students.First(s => s.StudentId == studentId);
+
             selectedStudent.Address = address;
+
+            if (address.AddressId == 0)
+            {
+                selectedStudent.Address.AddressId = selectedStudent.StudentId;
+            }
+
         }
     }
 }

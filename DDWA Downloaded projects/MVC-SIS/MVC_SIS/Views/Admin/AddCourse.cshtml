@@ -13,9 +13,18 @@
     <div class="col-xs-12">
         @using (Html.BeginForm())
         {
+            if (ViewData.ModelState.IsValid)
+            {
+                <div name="opening" class="alert alert-info">Enter the course name:</div>
+            }
+            else
+            {
+                @Html.ValidationSummary();
+            }
             <div class="form-group">
-                <label>Course</label>
+                @Html.LabelFor(m=>m.CourseName)
                 @Html.TextBoxFor(m => m.CourseName, new { @class = "form-control", placeholder = "Course" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.CourseName)</span>
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

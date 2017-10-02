@@ -39,14 +39,21 @@ namespace Exercises.Controllers
         {
             studentVM.Student.Courses = new List<Course>();
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+            if (ModelState.IsValid)
+            {
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            StudentRepository.Add(studentVM.Student);
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
 
-            return RedirectToAction("List");
+                StudentRepository.Add(studentVM.Student);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View("Add", studentVM);
+            }
         }
 
         [HttpGet]
@@ -58,7 +65,7 @@ namespace Exercises.Controllers
             viewModel.Student = model;
             viewModel.SetCourseItems(CourseRepository.GetAll());
             viewModel.SetMajorItems(MajorRepository.GetAll());
-
+            viewModel.SetStateItems(StateRepository.GetAll());
             return View(viewModel);
         }
 
@@ -71,8 +78,24 @@ namespace Exercises.Controllers
                 studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
             studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
-            StudentRepository.Edit(studentVM.Student);
 
+            StudentRepository.Edit(studentVM.Student);
+            StudentRepository.SaveAddress(studentVM.Student.StudentId, studentVM.Student.Address);
+
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var model = StudentRepository.Get(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Student student)
+        {
+            StudentRepository.Delete(student.StudentId);
             return RedirectToAction("List");
         }
     }
