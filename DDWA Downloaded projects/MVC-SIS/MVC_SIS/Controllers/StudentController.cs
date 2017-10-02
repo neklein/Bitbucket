@@ -38,6 +38,8 @@ namespace Exercises.Controllers
         public ActionResult Add(StudentVM studentVM)
         {
             studentVM.Student.Courses = new List<Course>();
+            studentVM.SetCourseItems(CourseRepository.GetAll());
+            studentVM.SetMajorItems(MajorRepository.GetAll());
 
 
             if (ModelState.IsValid)
@@ -73,16 +75,26 @@ namespace Exercises.Controllers
         public ActionResult Edit(StudentVM studentVM)
         {
             studentVM.Student.Courses = new List<Course>();
+            studentVM.SetCourseItems(CourseRepository.GetAll());
+            studentVM.SetMajorItems(MajorRepository.GetAll());
+            studentVM.SetStateItems(StateRepository.GetAll());
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
+            if (ModelState.IsValid)
+            {
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
 
-            StudentRepository.Edit(studentVM.Student);
-            StudentRepository.SaveAddress(studentVM.Student.StudentId, studentVM.Student.Address);
+                StudentRepository.Edit(studentVM.Student);
+                StudentRepository.SaveAddress(studentVM.Student.StudentId, studentVM.Student.Address);
 
-            return RedirectToAction("List");
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View("Edit", studentVM);
+            }
         }
 
         [HttpGet]
@@ -95,6 +107,7 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult Delete(Student student)
         {
+            
             StudentRepository.Delete(student.StudentId);
             return RedirectToAction("List");
         }

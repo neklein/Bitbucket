@@ -90,14 +90,23 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddState(State state)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(state.StateName))
             {
-                StateRepository.Add(state);
-                return RedirectToAction("GetStates");
+                ModelState.AddModelError("StateName", "Please enter the name of the state");
+                return View("AddState", state);
+
+            }
+            else if (string.IsNullOrWhiteSpace(state.StateAbbreviation))
+            {
+                ModelState.AddModelError("StateAbbreviation", "Please enter the state abbreviation");
+                return View("AddState", state);
+
             }
             else
             {
-                return View("AddState", state);
+                StateRepository.Add(state);
+                return RedirectToAction("GetStates");
+
             }
         }
 
@@ -111,14 +120,23 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditState(State state)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(state.StateName))
+            {
+                ModelState.AddModelError("StateName", "Please enter the name of the state");
+                return View("EditState", state);
+
+            }
+            else if (string.IsNullOrWhiteSpace(state.StateAbbreviation))
+            {
+                ModelState.AddModelError("StateAbbreviation", "Please enter the state abbreviation");
+                return View("EditState", state);
+
+            }
+
+            else
             {
                 StateRepository.Edit(state);
                 return RedirectToAction("GetStates");
-            }
-            else
-            {
-                return View("EditStat", state);
             }
         }
 

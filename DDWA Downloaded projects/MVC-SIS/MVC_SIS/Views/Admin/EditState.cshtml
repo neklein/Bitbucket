@@ -14,9 +14,20 @@
         @using (Html.BeginForm())
         {
             @Html.HiddenFor(m => m.StateAbbreviation)
+
+            if (ViewData.ModelState.IsValid)
+            {
+                <div name="opening" class="alert alert-info">Edit the State:</div>
+            }
+            else
+            {
+                @Html.ValidationSummary();
+            }
+
             <div class="form-group">
                 <label>State</label>
                 @Html.TextBoxFor(m => m.StateName, new { @class = "form-control", placeholder = "State" })
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.StateName)</span>
             </div>
             <button type="submit" class="btn btn-sm btn-primary">Save</button>
         }

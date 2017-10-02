@@ -14,9 +14,20 @@
         @using (Html.BeginForm())
         {
             @Html.HiddenFor(m=>m.CourseId)
+
+            if (ViewData.ModelState.IsValid)
+            {
+                <div name="opening" class="alert alert-info">Edit the Course:</div>
+            }
+            else
+            {
+                @Html.ValidationSummary();
+            }
+
             <div class="form-group">
                 <label>Course</label>
                 @Html.TextBoxFor(m=>m.CourseName, new { @class = "form-control", placeholder = "Course"})
+                <span class="text-danger">@Html.ValidationMessageFor(m => m.CourseName)</span>
             </div>
             <button type="submit" class="btn btn-small btn-primary">Save</button>
         }

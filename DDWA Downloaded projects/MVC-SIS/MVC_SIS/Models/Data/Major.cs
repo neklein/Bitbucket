@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace Exercises.Models.Data
 {
     public class Major:IValidatableObject
     {
+        [DisplayName("Major")]
         public int MajorId { get; set; }
         public string MajorName { get; set; }
 
@@ -15,9 +17,9 @@ namespace Exercises.Models.Data
         {
             List<ValidationResult> errors = new List<ValidationResult>();
 
-            if (string.IsNullOrWhiteSpace(MajorName))
+            if (MajorId == 0)
             {
-                errors.Add(new ValidationResult("Please enter a major", new[] { "MajorName" }));
+                errors.Add(new ValidationResult("Please enter a major", new[] { "MajorId" }));
             }
 
             return errors;
