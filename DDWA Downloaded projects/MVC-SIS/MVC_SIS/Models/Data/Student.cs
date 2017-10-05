@@ -31,6 +31,11 @@ namespace Exercises.Models.Data
                 errors.Add(new ValidationResult("Please enter the student's last name",
                     new[] { "LastName" }));
             }
+            if(Major.MajorId == 0)
+            {
+                errors.Add(new ValidationResult("Please select a major",
+                    new[] { "MajorId" }));
+            }
 
             return errors;
         }

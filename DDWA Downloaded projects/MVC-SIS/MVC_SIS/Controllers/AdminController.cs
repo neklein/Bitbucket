@@ -27,14 +27,15 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddMajor(Major major)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(major.MajorName))
             {
-                MajorRepository.Add(major.MajorName);
-                return RedirectToAction("Majors");
+                ModelState.AddModelError("MajorName", "Please enter a name for the Major");
+                return View("AddMajor", major);
             }
             else
             {
-                return View("AddMajor", major);
+                MajorRepository.Add(major.MajorName);
+                return RedirectToAction("Majors");
             }
         }
 
@@ -48,14 +49,17 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditMajor(Major major)
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(major.MajorName))
+            {
+                ModelState.AddModelError("MajorName", "Please enter a name for the Major");
+                return View("EditMajor", major);
+            }
+
+            else
             {
                 MajorRepository.Edit(major);
                 return RedirectToAction("Majors");
-            }
-            else
-            {
-                return View("EditMajor", major);
+
             }
         }
 
