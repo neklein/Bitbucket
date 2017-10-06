@@ -15,34 +15,41 @@
                         class="btn btn-primary">Create Dvd</button>
                 </div>
                 <div class="col-md-8">
-                             <div class="col-md-2">
+                    <form role="form">
+                        
+                        <div class="form-group">
+                            <div class="col-md-2">
                                     <button type="button"
                                     id="search-button"
                                     class="btn btn-primary">Search</button>   
-                             </div>
-                              <div class="col-md-3">
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" 
-                                            id="search-dropdown"
-                                            type="button" 
-                                            data-toggle="dropdown" required>Search Category
-                                            <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                              <li><a href="#title">Title</a></li>
-                                              <li><a href="#releaseYear">Release Year</a></li>
-                                              <li><a href="#director">Director Name</a></li>
-                                              <li><a href="#rating">Rating</a></li>                                                  
-                                            </ul>
-                                    </div>
-                                </div>      
-                                <div id="search-term-input" class="col-md-3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <div class="dropdown">
+                                  <select class="form-control" 
+                                          id="searchCategory" required>
+                                    <option>Search Category</option>  
+                                    <option value = "title">Title</option>
+                                    <option value="year">Release Year</option>
+                                    <option value="director">Director Name</option>
+                                    <option value="rating">Rating</option>                                                  
+                                    </select>
+                                </div>
+                            </div>                
+                        </div>
+                        <div class="form-group">
+                                <div id="search-term-div" class="col-md-3">
                                         <input type="text"
                                         class="form-control"
                                         id="search-term-input"
                                         placeholder="Search Term" required/>
-                                </div>                
+                          </div>
+                        </div>
+                    </form>
                 </div>
-                <hr/>                
+                <hr/> 
+                <ul class="list-group" id="errorMessages"></ul>
             </div>
 
             <div class="row">
@@ -85,7 +92,7 @@
                                                 Release Year:
                                             </label>
                                            <div class="col-md-4">
-                                               <input type="text"
+                                               <input type="number"
                                                class="form-control"
                                                id="edit-release-year"
                                                placeholder="Release Year" required/>
@@ -103,21 +110,16 @@
                                             </div> 
                                     </div>
                                     <div class="form-group">
-                                         <div class="dropdown">
+                                        <div class="dropdown">
                                              <label for="edit-rating" class="col-md-2">Rating:</label>
                                              <div class="col-md-4">
-                                                    <button class="btn btn-default dropdown-toggle" 
-                                                    type="button" 
-                                                    id="edit-rating"
-                                                    data-toggle="dropdown" required>G
-                                                    <span class="caret"></span></button>
-                                                    <ul class="dropdown-menu">
-                                                      <li><a href="#g">G</a></li>
-                                                      <li><a href="#pg">PG</a></li>
-                                                      <li><a href="#pg13">PG13</a></li>
-                                                      <li><a href="#r">R</a></li>                                                  
-                                                    </ul>      
-                                             </div>
+                                                <select class="form-control" id="edit-rating" required>
+                                                    <option value = "G">G</option>
+                                                    <option value="PG">PG</option>
+                                                    <option value="PG13">PG13</option>
+                                                    <option value="R">R</option>                                                  
+                                                </select>
+                                              </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -176,7 +178,7 @@
                                                     Release Year:
                                                 </label>
                                                <div class="col-md-4">
-                                                   <input type="text"
+                                                   <input type="number"
                                                    class="form-control"
                                                    id="create-release-year"
                                                    placeholder="Release Year" required/>
@@ -197,18 +199,14 @@
                                              <div class="dropdown">
                                                  <label for="create-rating" class="col-md-2">Rating:</label>
                                                  <div class="col-md-4">
-                                                        <button class="btn btn-default dropdown-toggle" 
-                                                        type="button" 
-                                                        id="create-rating"
-                                                        data-toggle="dropdown" required>Choose Rating
-                                                        <span class="caret"></span></button>
-                                                        <ul class="dropdown-menu">
-                                                          <li><a href = "G">G</a></li>
-                                                          <li><a href="PG">PG</a></li>
-                                                          <li><a href="PG13">PG13</a></li>
-                                                          <li><a href="R">R</a></li>                                                  
-                                                        </ul>      
-                                                 </div>
+                                                    <select class="form-control" id="create-rating" required>
+                                                                <option value = "0">Choose Rating</option>
+                                                                <option value = "G">G</option>
+                                                                <option value="PG">PG</option>
+                                                                <option value="PG13">PG13</option>
+                                                                <option value="R">R</option>                                                  
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -218,7 +216,8 @@
                                             <div class="col-md-4">
                                                    <input type="textarea"
                                                    class="form-control"
-                                                   id="create-notes"/>
+                                                   id="create-notes"
+                                                   placeholder="Enter Note"/>
                                             </div> 
                                         </div>
     
@@ -243,56 +242,31 @@
                             </div>   
                         </form>
                     </div>
-                    <div class="col-md-12" id="singleFormDiv" style="display:none">
-                            <h2 id="single-title">Dvd title</h2>
+                    <div class="col-md-12" id="searchFormDiv" style="display:none">
+                            <h2>Search Results</h2>
                             <hr/>
-                          
-                            <form class="form-horizontal" role="form" id="single-form">
-                                <div class="col-offset-md-2 col-md-10">
-                                            <div class="form-group" >
-                                                    <p class="col-md-2">
-                                                        Release Year:
-                                                    </p>
-                                                   <div class="col-md-4" id="single-release-year">
-                                                       <p>Provide release year</p>
-                                                   </div> 
-                                            </div> 
-                                            <div class="form-group" >
-                                                    <p class="col-md-2">
-                                                        Director:
-                                                    </p>
-                                                   <div class="col-md-4" id="single-director">
-                                                       <p>Director name here</p>
-                                                    </div> 
-                                            </div>
-                                            <div class="form-group">
-                                                     <p class="col-md-2">Rating:</p>
-                                                     <div class="col-md-4">
-                                                         <p id="single-rating">Provide the rating here</p>
-                                                     </div>
-                                            </div>
-                                            <div class="form-group">
-                                                    <p class="col-md-2">
-                                                        Notes:
-                                                    </p>
-                                                <div class="col-md-4" id="single-notes">
-                                                       <p>Provide notes here</p>
-                                                </div> 
-                                            </div>
-        
-                                            <div class="form-group">
-                                                    <div class="col-md-1">
-                                                        <input type="hidden" id="single-contact-id">
-                                                        <button type="button" 
-                                                                id="single-cancel-button" 
-                                                                class="btn btn-default" 
-                                                                onclick="hideCreateForm()">
-                                                            Back
-                                                        </button>
-                                                    </div>
-                                            </div>                  
-                                </div>   
-                            </form>
+                            <table id="SearchDvdTable" class="table table-hover">
+                                    <tr>
+                                        <th width="25%">Title</th>
+                                        <th width="21%">Release Year</th>
+                                         <th width="15%">Director</th>
+                                        <th width="15%">Rating</th>
+                                        <th width="12%"></th>
+                                        <th width="12%"></th>                                    
+                                    </tr>
+                                    <tbody id="searchContentRows"></tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-offset-md-2 col-md-2">
+                                        <button type="button" 
+                                        id="search-dvd-button" 
+                                        class="btn btn-default" 
+                                        onclick="hideSearchDiv()">
+                                            Back
+                                        </button>
+                                </div>        
+                            </div>
+    
                     </div>
                     <div class="col-md-12" id="singleDvd" style="display:none">
                             <h2 id="singleDvdTitle"><!--Link title here--></h2>

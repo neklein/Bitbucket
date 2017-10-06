@@ -14,6 +14,7 @@ $(document).ready(function() {
             type: 'POST',
             url: 'http://localhost:8080/dvd',
             data: JSON.stringify({
+
                 title: $('#create-dvd-title').val(),
                 realeaseYear: $('#create-release-year').val(),
                 director: $('#create-director').val(),
@@ -45,9 +46,60 @@ $(document).ready(function() {
                 .append($('<li>')
                 .attr({class: 'list-group-item list-group-item-danger'})
                 .text('Error calling web service. Please try again later'))    
+                
             }
         })
+    });
+    $('#search-button').click(function(event){
+        $('#errorMessages').empty();
+        
+            var category = $('#searchCategory').val();
+            var term = $('#search-term-input').val();
 
+            
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/dvds/' + category + '/' + term,
+            headers: {
+                        'Accept': 'application/json',
+                        'Content-Type' : 'application/json'
+            },
+            'dataType' : 'json',       
+            success: function(dvdArray){     
+                
+                $.each(dvdArray, function(index, dvd){
+                            
+                    var contentRows = $('#searchContentRows');
+                            
+                    var title = dvd.title;
+                    var realeaseYear = dvd.realeaseYear;
+                    var director = dvd.director;
+                    var rating = dvd.rating;
+                    var dvdId = dvd.dvdId;
+
+                    var row = '<tr>';
+                    row += '<td><a onclick="accessDvd(' + dvdId + ')">' + title + '</a></td>';
+                    row += '<td>' + realeaseYear + '</td>';
+                    row += '<td>' + director + '</td>';
+                    row += '<td>' + rating + '</td>';
+                    row += '<td><a onclick="showEditForm(' + dvdId + ')">Edit</a></td>';
+                    row += '<td><a onclick="deleteDvd(' + dvdId + ')">Delete</a></td>';
+
+                    contentRows.append(row);
+        
+                })
+                $('#dvd-display').hide();
+                $('#dvd-list').hide();
+                $('#searchFormDiv').show();                
+            },
+            error: function(){
+                $('#errorMessages')
+                .append($('<li>')
+                .attr({class: 'list-group-item list-group-item-danger'})
+                .text('Please select a valid search category and search term.'))
+
+            }
+        })
     });
     
     $('#edit-button').click(function(event){
@@ -57,10 +109,10 @@ $(document).ready(function() {
             data: JSON.stringify({
                 dvdId: $('#edit-dvd-id').val(),
                 title: $('#edit-dvd-title').val(),
-                realeaseYear: $('#create-release-year').val(),
-                director: $('#create-director').val(),
-                rating: $('#create-rating').val(),
-                notes: $('#create-notes').val()
+                realeaseYear: $('#edit-release-year').val(),
+                director: $('#edit-director').val(),
+                rating: $('#edit-rating').val(),
+                notes: $('#edit-notes').val()
 
             }),
             headers: {
@@ -70,8 +122,6 @@ $(document).ready(function() {
             success: function() {
                 $('#errorMessages').empty();
                 hideEditForm();
-                loadDvds();
-
             },
             error: function (){
                 $('#errorMessages')
@@ -166,6 +216,12 @@ function accessDvd(dvdId){
 
 function hideSingleDvd(){
     $('#errorMessages').empty();
+    $('#singleDvdTitle').empty();
+    $('#singleDvdReleaseYear').empty();
+    $('#singleDvdDirector').empty();
+    $('#singleDvdRating').empty();
+    $('#singleDvdNotes').empty();
+
     $('#singleDvd').hide();
     $('#dvd-display').show();
     $('#dvd-list').show();
@@ -206,12 +262,13 @@ function showEditForm(dvdId){
 
 function hideEditForm(){
     $('#errorMessages').empty();
+    $('#editDvdHeader').empty();
     
-    $('#create-dvd-title').val('');
-    $('#create-release-year').val('');
-    $('#create-director').val('');
-    $('#create-rating').val('');
-    $('#create-notes').val('');
+    $('#edit-dvd-title').val('');
+    $('#edit-release-year').val('');
+    $('#edit-director').val('');
+    $('#edit-rating').val('');
+    $('#edit-notes').val('');
     
     $('#editFormDiv').hide();
     $('#dvd-display').show();
@@ -243,4 +300,15 @@ function deleteDvd(dvdId){
 
 function clearDvdTable(){
     $('#contentRows').empty();
+}
+
+function hideSearchDiv(){
+    $('#searchContentRows').empty();
+
+    $('#searchFormDiv').hide();                    
+    $('#dvd-display').show();
+    $('#dvd-list').show();
+
+    loadDvds();
+
 }
