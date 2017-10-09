@@ -1,0 +1,16 @@
+﻿@model MarvelAPI.Models.MarvelResultVM
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Enter a name to search for with the Marvel API</h2>
+@using(Html.BeginForm("SearchByName", "Search", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m=>m.SearchName)
+        @Html.TextBoxFor(m=>m.SearchName)
+        <span class="text-danger">@Html.ValidationMessageFor(m=>m.SearchName)</span>
+    </div>
+    <input type="submit" value="Excelsior!" class="btn btn-danger" />
+}
+
