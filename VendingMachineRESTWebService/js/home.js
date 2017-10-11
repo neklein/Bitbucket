@@ -64,6 +64,9 @@ $(document).ready(function() {
         $('#message-in').val('');
         $('#item-in').val('');
         total = 0;
+
+        $('#items-to-vend').empty();
+        loadItems();
     });
 });
 
@@ -80,11 +83,12 @@ function loadItems(){
                 var price = item.price;
                 var quantity = item.quantity;
 
-                var row = '<div class = "col-sm-4" style = "text-align: center; background-color: grey"><ul>';
+                var row = '<div class = "col-sm-4" style = "text-align: center; background-color: grey; padding: 2px; border: 1px solid #021a40"><ul>';
                     row += '<p><a onclick="selectItem(' + id + ')">' + name + '</a></p>';
                     row += '<p>$' + price + '</p>';
                     row += '<p>Quantity Left: ' + quantity + '</p>';
                     row += '</ul></div>';
+
                     
 
                 column.append(row);
