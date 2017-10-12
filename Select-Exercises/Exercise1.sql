@@ -4,3 +4,6 @@
 
 USE Northwind;
 GO
+
+SELECT *
+FROM PRODUCTS;

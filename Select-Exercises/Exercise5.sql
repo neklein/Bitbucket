@@ -4,3 +4,7 @@
 
 USE Northwind;
 GO
+
+SELECT *
+FROM ORDERS
+WHERE FREIGHT > '100'

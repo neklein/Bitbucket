@@ -5,3 +5,7 @@
 
 USE Northwind;
 GO
+
+SELECT *
+FROM ORDERS
+WHERE CUSTOMERID = 'QUEDE';

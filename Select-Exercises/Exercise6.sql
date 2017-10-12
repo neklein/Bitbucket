@@ -5,3 +5,9 @@
 
 USE Northwind;
 GO
+
+SELECT *
+FROM ORDERS
+WHERE ShipCountry = 'usa'
+AND FREIGHT > 10.00
+AND FREIGHT < 20;

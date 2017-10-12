@@ -1,36 +1,41 @@
 $(document).ready(function() {
     loadItems();
 
-    var addDollar = 1;
-    var addQuarter = .25;
-    var addDime = .1;
-    var addNickel = .05;
-
-    var total = 0;
-    $('#money-in').val(total);
-  
+    $('#money-in').val(0);
 
     $('#addDollar').on('click', function(event){
-        total += addDollar;
-        $('#money-in').val(total);
+        
+        var total = parseFloat($('#money-in').val());
+            total += 1;
+
+        $('#money-in').val(total.toFixed(2));
     });
 
     $('#addQuarter').on('click', function(event){
-        total += addQuarter;
-        $('#money-in').val(total);        
+        var total = parseFloat($('#money-in').val());
+        total += 0.25;
+
+    $('#money-in').val(total.toFixed(2));
     });
 
     $('#addDime').on('click', function(event){
-        total += addDime;
-        $('#money-in').val(total);        
+        
+        var total = parseFloat($('#money-in').val());
+        total += 0.10;
+
+        $('#money-in').val(total.toFixed(2));   
     });
+
     $('#addNickel').on('click', function(event){
-        total += addNickel;
-        $('#money-in').val(total);        
+        var total = parseFloat($('#money-in').val());
+            total += 0.05;
+
+        $('#money-in').val(total.toFixed(2));    
     });
 
     $('#purchase-button').on('click', function(event){
         var id = $('#item-in').val();
+        var total = $('#money-in').val();
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8080/money/' + total + '/item/' + id,
@@ -83,11 +88,11 @@ function loadItems(){
                 var price = item.price;
                 var quantity = item.quantity;
 
-                var row = '<div class = "col-sm-4" style = "text-align: center; background-color: grey; padding: 2px; border: 1px solid #021a40"><ul>';
-                    row += '<p><a onclick="selectItem(' + id + ')">' + name + '</a></p>';
+                var row = '<div class = "col-sm-4" style = "text-align: center; padding: 2px; border: 1px solid #021a40"><a onclick="selectItem(' + id + ')">';
+                    row += '<p>' + name + '</p>';
                     row += '<p>$' + price + '</p>';
                     row += '<p>Quantity Left: ' + quantity + '</p>';
-                    row += '</ul></div>';
+                    row += '</a></div>';
 
                     
 
